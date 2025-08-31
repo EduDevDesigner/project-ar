@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolha o tema</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Faixas azuis superior e inferior */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #007BFF;
+      z-index: 0;
+    }
+    body::before { top: 0; border-bottom: 8px solid #8cc65a; /* linha verde embaixo */}
+    body::after { bottom: 0; border-top: 8px solid #8cc65a; /* linha verde embaixo */ }
+
+    /* Ajusta container para não ultrapassar faixas */
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      padding-top: 70px;
+      padding-bottom: 70px;
+      box-sizing: border-box;
+    }
+
+    /* Imagem do logo2 mais próxima do topo */
+    .logo2 {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 220px;
+      width: 80%;
+      height: auto;
+      z-index: 1;
+    }
+
+    /* Imagem de fundo animada */
+    .fundo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      max-height: 90%;
+      z-index: 0;
+      animation: flutuar 4s ease-in-out infinite;
+    }
+
+    @keyframes flutuar {
+      0% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-15px); }
+      100% { transform: translate(-50%, -50%) translateY(0); }
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card {
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      width: 200px;
+      max-width: 25vw;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      border: 5px solid #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 20px rgba(0,255,200,0.6);
+    }
+
+    .card[data-tema="aviao"] img { transform: rotate(-5deg); }
+    .card[data-tema="navio"] img { transform: rotate(5deg); }
+    .card:hover img { transform: scale(1.1) rotate(0deg); }
+
+    /* Botão voltar fixo */
+    .btn-futurista {
+      position: fixed;
+      font-family: 'KOMIKA AXIS', sans-serif;
+      color: yellow;
+      text-shadow: 2px 2px 5px black; 
+      bottom: 120px; /* um pouco acima da faixa inferior azul */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #007BFF;
+      
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0px 4px 8px #9af6ff;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-futurista:hover {
+      background-color: #0056b3;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Responsividade: mantém lado a lado, apenas reduz tamanho */
+    @media (max-width: 1024px) { .cards { gap: 15px; } .card { width: 160px; } }
+    @media (max-width: 768px) { .cards { gap: 10px; } .card { width: 120px; } }
+    @media (max-width: 480px) { .cards { gap: 8px; } .card { width: 100px; } }
+  </style>
+</head>
+<body class="tela-escolha">
+  <img src="Imagens/Logo2.png" alt="Logo2" class="logo2">
+  <img src="Imagens/Maclin_Poster_Fundo.png" alt="Fundo" class="fundo">
+
+  <div class="container">
+    <h1>Escolha o Tema</h1>
+    <div class="cards">
+      <div class="card" data-tema="aviao" onclick="location.href='apresentacao_aviao.html'">
+        <img src="Imagens/Aviao.jpg" alt="Avião">
+        <p>Avião</p>
+      </div>
+      <div class="card" data-tema="carro" onclick="location.href='apresentacao_carro.html'">
+        <img src="Imagens/carro.jpg" alt="Carro">
+        <p>Carro</p>
+      </div>
+      <div class="card" data-tema="navio" onclick="location.href='navio.html'">
+        <img src="Imagens/Navio2.jpg" alt="Navio">
+        <p>Navio</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão voltar fixo -->
+  <button class="btn-futurista" onclick="location.href='index.html'">Voltar</button>
+</body>
+</html>

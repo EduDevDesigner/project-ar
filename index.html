@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/main.js"></script>
+  <style>
+    /* Container centralizado */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      z-index: 1; /* garante que fique acima das faixas */
+      box-sizing: border-box;
+    }
+
+    /* Faixas azuis superior e inferior */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50px; /* altura da faixa */
+      background-color: #007BFF; /* azul */
+      z-index: 0;
+    }
+    body::before {
+      top: 0;
+      border-bottom: 8px solid #8cc65a; /* linha verde embaixo */
+    }
+    body::after {
+      bottom: 0;
+      border-top: 8px solid #8cc65a; /* linha verde em cima */
+    }
+
+    /* Imagem do logo2 posicionada mais próxima do topo */
+    .logo2 {
+      max-width: 250px;
+      width: 40%;
+      height: auto;
+      margin-bottom: 20px;
+      align-self: center;
+    }
+
+    /* Imagem responsiva com animação */
+    .fundo {
+      max-width: 100%;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Animação de leve flutuação vertical */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Mantendo o botão como está */
+    .btn-futurista {
+      margin-top: 1rem;
+      font-family: 'KOMIKA AXIS', sans-serif;
+      color: yellow;
+      text-shadow: 2px 2px 5px black; 
+    }
+
+    /* Garante que o conteúdo não encoste nas faixas */
+    .container {
+      padding-top: 70px; /* espaço superior > altura faixa */
+      padding-bottom: 70px; /* espaço inferior > altura faixa */
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .logo2 {
+        width: 50%;
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo2 {
+        width: 60%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body class="tela-inicial">
+  <div class="container">
+    <img src="Imagens/Logo2.png" alt="Logo2" class="logo2" height="90" width="150">
+    <img src="Imagens/Maclin_Poster.png" alt="Logo Produto" class="fundo" height="699" width="660">
+    <button class="btn-futurista" onclick="location.href='escolha.html'">Iniciar</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>Meclin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <!-- HUD (invisível até detectar o track) -->
+    <div id="hud" class="hidden">
+      <div id="timer">60</div>
+      <div id="body-container">
+        <div id="body-bar"></div>
+      </div>
+      <!-- Elementos interativos -->
+      <img id="pill" class="game-item" src="Imagens/Pilula.png" alt="Pílula">
+      <img id="emoji" class="game-item" src="Imagens/emoji.png" alt="Emoji">
+    </div>
+    
+    <!-- Tela de fim de jogo -->
+    <div id="game-over-screen" class="hidden">
+      <div class="game-over-content">
+        <h2 id="game-over-message"></h2>
+        <button class="btn-futurista" id="restart-btn">Reiniciar</button>
+        <button class="btn-futurista" id="choose-btn">Escolher Tema</button>
+      </div>
+    </div>
+
+    <!-- 🔹 Mensagem de foco no track -->
+    <div id="track-message">
+      Aponte a câmera para o marcador para começar!
+    </div>
+
+    <!-- Cena AR -->
+    <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <img id="track" src="Imagens/Meclin.jpg"/>
+        <a-asset-item id="carro" src="Modelos/Carro_Final.glb"></a-asset-item>
+        <a-asset-item id="roda" src="Modelos/Roda.glb"></a-asset-item>
+        <a-asset-item id="nuvem1" src="Modelos/Nuvem03.glb"></a-asset-item>
+        <!-- 🔊 Som do avião -->
+        <audio id="carro-sound" src="Audios/" preload="auto"></audio>
+      </a-assets>
+
+      <a-video id="terreno" src="Videos/Estrada.mp4" autoplay loop muted playsinline></a-video>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity id="track-target" mindar-image-target="targetIndex: 0">
+        <a-plane src="#terreno" position="0 0 0" height="1" width="1" rotation="0 0 -90"></a-plane>
+        <a-gltf-model src="#roda" rotation="90 0 0 " position="0 0 0" scale="0.1 0.1 0.1" 
+          animation="property: position; 
+             dir: alternate; 
+             dur: 400; 
+             easing: easeInOutSine; 
+             loop: true; 
+             to: 0.001 0 0"></a-gltf-model>
+        <a-gltf-model src="#carro" rotation="90 0 0" position="0 0 0" scale="0.1 0.1 0.1"
+           animation="property: position; 
+             dir: alternate; 
+             dur: 400; 
+             easing: easeInOutSine; 
+             loop: true; 
+             to: 0 0 0.03"
+           animation__rot="property: rotation; 
+                  to: 90 2 0; 
+                  dur: 200; 
+                  easing: easeInOutSine; 
+                  loop: true; 
+                  dir: alternate">
+        </a-gltf-model>
+
+
+       
+      </a-entity>
+    </a-scene>
+
+    <script src="main.js"></script>
+    <script src="sound.js"></script> <!-- 🔹 Script separado para o som -->
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apresentação</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/main.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      overflow: hidden; /* impede scroll */
+    }
+
+    .faixa-superior {
+      height: 50px;
+      background-color: #007BFF;
+      width: 100%;
+      border-bottom: 8px solid #8cc65a;
+    }
+
+    .faixa-inferior {
+      height: 50px;
+      background-color: #007BFF;
+      width: 100%;
+      border-top: 8px solid #8cc65a;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 20px 20px;
+      box-sizing: border-box;
+    }
+
+    /* Logo */
+  .logo {
+    width: 450px; /* aumentada */
+    max-width: 75vw; /* garante responsividade */
+    margin-bottom: 15px;
+    animation: flutuar 3s ease-in-out infinite;
+  }
+
+    /* Texto de apresentação */
+    #textoApresentacao {
+      font-size: 15px;
+      line-height: 1.4;
+      color: #ffff00;
+      text-shadow: -1px -1px 0 black, 1px -1px 0 black, -2px 2px 0 black, 2px 1px 0 black;
+      margin-bottom: 20px;
+    }
+
+    /* Objetivos do jogo */
+    #game-objectives {
+  font-size: 14px;
+  line-height: 1.3;
+  color: #fff;
+  text-align: left;
+  max-width: 500px;
+  margin-bottom: 50px;
+
+  border: 6px solid #007BFF; /* linha verde */
+  border-radius: 10px;        /* cantos arredondados */
+  padding: 15px;              /* espaço interno */
+  box-shadow: 0 0 15px rgba(63, 63, 63, 0.5), 0 0 30px rgba(34, 34, 34, 0.3); /* sombra verde */
+  background-color: rgba(0, 0, 0, 0.7); /* leve fundo escuro para destaque */
+}
+
+
+    #game-objectives h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #ffff00;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    #game-objectives ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    #game-objectives li {
+      margin-bottom: 6px;
+    }
+
+    .botoes {
+      position: absolute;
+      bottom: 60px; /* acima da faixa inferior */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+
+    /* Flutuação da logo */
+    @keyframes flutuar {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Responsividade */
+  @media (max-width: 1024px) {
+    .logo { width: 350px; }
+    #game-objectives { max-width: 400px; font-size: 13px; }
+  }
+
+  @media (max-width: 768px) {
+    .logo { width: 280px; }
+    #game-objectives { max-width: 350px; font-size: 12px; }
+  }
+
+  @media (max-width: 480px) {
+    .logo { width: 220px; }
+    #game-objectives { max-width: 300px; font-size: 11px; }
+  }
+  </style>
+</head>
+<body class="tela-apresentacao">
+  <div class="faixa-superior"></div>
+
+  <div class="container">
+    <img src="Imagens/Carro_Sombra.png" 
+     alt="Logo Produto" 
+     class="logo flutuante">
+
+    <p id="textoApresentacao">
+      Ao viajar como passageiro, especialmente no banco<br>
+      de trás, os olhos percebem o ambiente fixo dentro<br>
+      do veículo, mas o ouvido interno detecta o movimento. <br>
+      Essa diferença de sinais pode gerar mal-estar.
+    </p>
+
+    <div id="game-objectives">
+      <h2>🎯 Objetivos do Game</h2>
+      <ul>
+        <li>A barra vai ficando <span style="color: #bdff00; font-weight: bold;">verde</span> (enjoo) com o tempo.</li>
+        <li>Clicar na 💊 pílula → diminui o verde (cura).</li>
+        <li>Clicar no 🤢 emoji → acelera o verde (piora).</li>
+        <li>Manter a barra <span style="color: #00c6ff; font-weight: bold;">azul</span> até o tempo acabar (60s).</li>
+        <li>Se ficar totalmente <span style="color: #bdff00; font-weight: bold;">verde</span> → perdeu.</li>
+      </ul>
+    </div>
+
+    <div class="botoes">
+      <button class="btn-futurista" id="skipBtn" onclick="window.location.href='carro.html'">Pular</button>
+    </div>
+  </div>
+
+  <div class="faixa-inferior"></div>
+</body>
+</html>

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'KOMIKA AXIS';
+  src: url('fonts/KOMIKAAxis.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body {
   margin: 0;
   font-family: 'KOMIKA AXIS', sans-serif;

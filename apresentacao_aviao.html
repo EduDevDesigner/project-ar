@@ -13,20 +13,20 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: 'KOMIKA AXIS', sans-serif;
       background: #f4f4f4;
       overflow: hidden; /* impede scroll */
     }
 
     .faixa-superior {
-      height: 50px;
+      height: 20px;
       background-color: #007BFF;
       width: 100%;
       border-bottom: 8px solid #8cc65a;
     }
 
     .faixa-inferior {
-      height: 50px;
+      height: 20px;
       background-color: #007BFF;
       width: 100%;
       border-top: 8px solid #8cc65a;
@@ -47,8 +47,8 @@
     /* Logo */
   .logo {
     width: 450px; /* aumentada */
-    max-width: 75vw; /* garante responsividade */
-    margin-bottom: 15px;
+    max-width: 60vw; /* garante responsividade */
+    margin-bottom: 10px;
     animation: flutuar 3s ease-in-out infinite;
   }
 
@@ -79,7 +79,7 @@
 
 
     #game-objectives h2 {
-      font-size: 14px;
+      font-size: 12px;
       margin-bottom: 8px;
       color: #ffff00;
       text-align: center;
@@ -95,12 +95,7 @@
       margin-bottom: 6px;
     }
 
-    .botoes {
-      position: absolute;
-      bottom: 60px; /* acima da faixa inferior */
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    
     
 
     /* Flutuação da logo */
@@ -112,7 +107,7 @@
 
     /* Responsividade */
   @media (max-width: 1024px) {
-    .logo { width: 350px; }
+    .logo { width: 50px; }
     #game-objectives { max-width: 400px; font-size: 13px; }
   }
 

@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Changa+One&display=swap');
 
+/* Remove botão padrão do A-Frame */
+.a-enter-vr, .a-enter-vr-button, .a-enter-vr__button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 
 body {
   margin: 0;

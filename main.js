@@ -182,7 +182,7 @@ updateBar();
 const aviaoSound = document.getElementById('aviao-sound') || null;
 const navioSound = document.getElementById('navio-sound') || null;
 
-function setupAudio(el, volume=1, loop=true){
+function setupAudio(el, volume = 1, loop = true) {
   if (!el) return false;
   el.volume = volume;
   el.loop = loop;
@@ -194,19 +194,39 @@ const hasNavio = setupAudio(navioSound, 1, true);
 
 // Desbloqueio em mobile: 1º toque libera áudio
 let audioUnlocked = false;
-function unlockAudioOnce(){
+function unlockAudioOnce() {
   if (audioUnlocked) return;
   audioUnlocked = true;
-  const tryPrime = a => a && a.play().then(()=>{ a.pause(); a.currentTime = 0; }).catch(()=>{});
+
+  function tryPrime(a) {
+    if (!a) return;
+    a.play()
+      .then(() => {
+        a.pause();
+        a.currentTime = 0;
+      })
+      .catch(() => {});
+  }
+
   tryPrime(aviaoSound);
   tryPrime(navioSound);
 }
 window.addEventListener('pointerdown', unlockAudioOnce, { once: true });
 
 // Helpers
-function playAudio(a){ a && a.play().catch(e=>console.log('Som bloqueado até interação:', e)); }
-function pauseAudio(a){ if (a) a.pause(); }
-function stopAudio(a){ if (a){ a.pause(); a.currentTime = 0; } }
+function playAudio(a) {
+  if (!a) return;
+  a.play().catch(e => console.log('Som bloqueado até interação:', e));
+}
+function pauseAudio(a) {
+  if (!a) return;
+  a.pause();
+}
+function stopAudio(a) {
+  if (!a) return;
+  a.pause();
+  a.currentTime = 0;
+}
 
 // Reage ao marcador
 trackTarget.addEventListener('targetFound', () => {
@@ -222,8 +242,13 @@ trackTarget.addEventListener('targetLost', () => {
 
 // Parar DEFINITIVAMENTE no fim do jogo (não volta ao focar o track)
 const _originalEndGame = window.endGame;
-window.endGame = function(message){
+window.endGame = function (message) {
   stopAudio(aviaoSound);
   stopAudio(navioSound);
-  _originalEndGame(message);
+  if (typeof _originalEndGame === 'function') {
+    _originalEndGame(message);
+  } else {
+    // se original não existir, ainda assim exibimos mensagem simples
+    console.warn('originalEndGame não está definido.');
+  }
 };

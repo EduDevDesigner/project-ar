@@ -37,7 +37,7 @@
     <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind;" 
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
+             xr-mode-ui="enabled: false" 
              device-orientation-permission-ui="enabled: false">
 
       <a-assets>
@@ -46,7 +46,7 @@
         <a-asset-item id="roda" src="Modelos/Roda.glb"></a-asset-item>
         <a-asset-item id="nuvem1" src="Modelos/Nuvem03.glb"></a-asset-item>
         <!-- 🔊 Som do avião -->
-        <audio id="carro-sound" src="Audios/" preload="auto"></audio>
+        <audio id="carro-sound" src="Audios/CarroSom.mp3" preload="auto"></audio>
       </a-assets>
 
       <a-video id="terreno" src="Videos/Estrada.mp4" autoplay loop muted playsinline></a-video>

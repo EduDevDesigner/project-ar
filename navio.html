@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>Meclin</title>
+    <title>Meclin Navio AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
@@ -44,7 +44,7 @@
         <img id="track" src="Imagens/Meclin.jpg"/>
         <a-asset-item id="navio" src="Modelos/Navio.glb"></a-asset-item>
         <a-asset-item id="nuvem1" src="Modelos/Nuvem03.glb"></a-asset-item>
-        <!-- 🔊 Som do avião -->
+        <!-- 🔊 Som do oceano -->
         <audio id="aviao-sound" src="Audios/AviaoSom.mp3" preload="auto"></audio>
       </a-assets>
 
@@ -53,32 +53,28 @@
 
       <a-entity id="track-target" mindar-image-target="targetIndex: 0">
         <a-plane src="#oceano" position="0 0 0" height="1" width="1" rotation="0 0 90"></a-plane>
-        <a-gltf-model src="#navio" rotation="90 0 0 " position="0 0 0.5" scale="0.1 0.1 0.1" 
-             animation="property: position; 
-                  to: 0 0.05 0.3; 
-                  dur: 300; 
-                  easing: easeInOutSine; 
-                  loop: true; 
-                  dir: alternate"
-             animation__rot="property: rotation; 
-                  to: 90 2 0; 
-                  dur: 200; 
-                  easing: easeInOutSine; 
-                  loop: true; 
-                  dir: alternate"></a-gltf-model>
+        
+        <!-- 🚢 Navio com animação de mar BEM agitado -->
+        <a-gltf-model src="#navio" 
+             rotation="90 0 0" 
+             position="0 0 0" 
+             scale="0.1 0.1 0.1"
+             animation__rock="property: rotation; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true; to: 90 18 8"
+             animation__sway="property: position; dir: alternate; dur: 1800; easing: easeInOutSine; loop: true; to: 0 0.08 0">
+        </a-gltf-model>
 
-        <!-- Quatro nuvens com animação de paralaxe -->
-        <a-gltf-model src="#nuvem1" position="0 -0.6 0.2" scale="0.05 0.05 0.05" rotation=" 0 0 180"
+        <!-- Quatro nuvens com animação de paralaxe (mais acima) -->
+        <a-gltf-model src="#nuvem1" position="0 -0.3 0.2" scale="0.03 0.03 0.03" rotation="0 0 180"
             animation="property: position; to:0 0.6 0.2; dur: 12000; easing: linear; loop: true"></a-gltf-model>
 
-        <a-gltf-model src="#nuvem1" position="0.1 -0.8 0.3" scale="0.06 0.06 0.06" rotation=" 0 0 180"
+        <a-gltf-model src="#nuvem1" position="0.1 -0.2 0.3" scale="0.03 0.03 0.03" rotation="0 0 180"
             animation="property: position; to:0.1 0.8 0.3; dur: 15000; easing: linear; loop: true"></a-gltf-model>
 
-        <a-gltf-model src="#nuvem1" position="-0.1 -0.7 0.4" scale="0.04 0.04 0.04" rotation=" 0 0 180"
+        <a-gltf-model src="#nuvem1" position="-0.1 -0.1 0.4" scale="0.02 0.02 0.02" rotation="0 0 180"
             animation="property: position; to:-0.1 0.7 0.4; dur: 10000; easing: linear; loop: true"></a-gltf-model>
 
-        <a-gltf-model src="#nuvem1" position="0.2 -0.9 0.5" scale="0.05 0.05 0.05" rotation=" 0 0 180"
-            animation="property: position; to: 0.2 0.9 0.5; dur: 18000; easing: linear; loop: true"></a-gltf-model>
+        <a-gltf-model src="#nuvem1" position="0.2 -0.05 0.5" scale="0.02 0.02 0.02" rotation="0 0 180"
+            animation="property: position; to:0.2 0.9 0.5; dur: 18000; easing: linear; loop: true"></a-gltf-model>
       </a-entity>
     </a-scene>
 

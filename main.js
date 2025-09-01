@@ -6,7 +6,6 @@ const bodyBar = document.getElementById("body-bar");
 const pill = document.getElementById("pill");
 const emoji = document.getElementById("emoji");
 
-const originalEndGame = window.endGame;
 
 let spawnInterval, timer, progress;
 let speedUpDone = false;
@@ -177,65 +176,53 @@ updateBar();
 
 //----------------------------------------------------------------------
 
-// 🎵 Controle do som do avião
+// ------------------- ÁUDIO -------------------
+
+// Avião
 const aviaoSound = document.getElementById("aviao-sound");
-aviaoSound.volume = 1; // reduz o volume para 10%
-aviaoSound.loop = true; // Som contínuo
+aviaoSound.volume = 1;
+aviaoSound.loop = true;
 
-// Quando encontra o marcador → toca som do avião
-trackTarget.addEventListener("targetFound", () => {
-  if (gameOver) return; // 🔹 se o jogo terminou, não tocar o som
-  if (!aviaoSound.paused) return;
-  aviaoSound.play().catch(err => console.log("Som bloqueado pelo navegador até interação:", err));
-});
-
-// Quando perde o marcador → pausa som do avião
-trackTarget.addEventListener("targetLost", () => {
-  aviaoSound.pause();
-});
-
-// Quando finalizar o jogo → pausa som do avião e garante que não volte
-function stopAviaoSoundOnGameOver() {
-  aviaoSound.pause();
-  aviaoSound.currentTime = 0;
-}
-
-// 🔹 Garante que o som pare quando o jogo terminar
-
-window.endGame = function(message) {
-  stopAviaoSoundOnGameOver();
-  originalEndGame(message);
-};
-
-
-// ---------------------------------------------------------------------
-// 🎵 Controle do som do Navio
+// Navio
 const navioSound = document.getElementById("navio-sound");
-navioSound.volume = 1; // ajusta volume (0 a 1)
-navioSound.loop = true; // som contínuo
+navioSound.volume = 1;
+navioSound.loop = true;
 
-// Quando encontra o marcador → toca som do navio
-trackTarget.addEventListener("targetFound", () => {
-  if (gameOver) return; // não toca se o jogo terminou
-  if (!navioSound.paused) return; // já está tocando
-  navioSound.play().catch(err => console.log("Som bloqueado pelo navegador até interação:", err));
-});
-
-// Quando perde o marcador → pausa som do navio
-trackTarget.addEventListener("targetLost", () => {
-  navioSound.pause();
-});
-
-// Quando finalizar o jogo → pausa som do navio e garante que não volte
-function stopNavioSoundOnGameOver() {
-  navioSound.pause();
-  navioSound.currentTime = 0;
+// Função para tocar áudio com catch em caso de bloqueio
+function playAudio(audio) {
+  audio.play().catch(err => console.log("Som bloqueado até interação do usuário:", err));
 }
 
-// 🔹 Garante que o som do navio pare quando o jogo terminar
+// Função para parar e resetar áudio
+function stopAudio(audio) {
+  audio.pause();
+  audio.currentTime = 0;
+}
 
+// Unifica os eventos do marcador
+trackTarget.addEventListener("targetFound", () => {
+  if (gameOver) return;
+  playAudio(aviaoSound);
+  playAudio(navioSound);
+});
+
+trackTarget.addEventListener("targetLost", () => {
+  stopAudio(aviaoSound);
+  stopAudio(navioSound);
+});
+
+// ------------------- FIM DO JOGO -------------------
+// Unifica parada de todos os sons
+const originalEndGame = window.endGame;
 window.endGame = function(message) {
-  stopNavioSoundOnGameOver();  // novo
+  stopAudio(aviaoSound);
+  stopAudio(navioSound);
   originalEndGame(message);
 };
 
+// ------------------- DESBLOQUEIO MOBILE -------------------
+// Em mobile, som só toca após interação
+document.body.addEventListener("click", () => {
+  if (aviaoSound.paused) playAudio(aviaoSound);
+  if (navioSound.paused) playAudio(navioSound);
+});

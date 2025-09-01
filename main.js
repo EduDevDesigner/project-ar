@@ -178,51 +178,52 @@ updateBar();
 
 // ------------------- ÁUDIO -------------------
 
-// Avião
-const aviaoSound = document.getElementById("aviao-sound");
-aviaoSound.volume = 1;
-aviaoSound.loop = true;
+// ---------------- ÁUDIO (robusto) ----------------
+const aviaoSound = document.getElementById('aviao-sound') || null;
+const navioSound = document.getElementById('navio-sound') || null;
 
-// Navio
-const navioSound = document.getElementById("navio-sound");
-navioSound.volume = 1;
-navioSound.loop = true;
-
-// Função para tocar áudio com catch em caso de bloqueio
-function playAudio(audio) {
-  audio.play().catch(err => console.log("Som bloqueado até interação do usuário:", err));
+function setupAudio(el, volume=1, loop=true){
+  if (!el) return false;
+  el.volume = volume;
+  el.loop = loop;
+  return true;
 }
 
-// Função para parar e resetar áudio
-function stopAudio(audio) {
-  audio.pause();
-  audio.currentTime = 0;
-}
+const hasAviao = setupAudio(aviaoSound, 1, true);
+const hasNavio = setupAudio(navioSound, 1, true);
 
-// Unifica os eventos do marcador
-trackTarget.addEventListener("targetFound", () => {
+// Desbloqueio em mobile: 1º toque libera áudio
+let audioUnlocked = false;
+function unlockAudioOnce(){
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  const tryPrime = a => a && a.play().then(()=>{ a.pause(); a.currentTime = 0; }).catch(()=>{});
+  tryPrime(aviaoSound);
+  tryPrime(navioSound);
+}
+window.addEventListener('pointerdown', unlockAudioOnce, { once: true });
+
+// Helpers
+function playAudio(a){ a && a.play().catch(e=>console.log('Som bloqueado até interação:', e)); }
+function pauseAudio(a){ if (a) a.pause(); }
+function stopAudio(a){ if (a){ a.pause(); a.currentTime = 0; } }
+
+// Reage ao marcador
+trackTarget.addEventListener('targetFound', () => {
   if (gameOver) return;
-  playAudio(aviaoSound);
-  playAudio(navioSound);
+  if (hasAviao && aviaoSound.paused) playAudio(aviaoSound);
+  if (hasNavio && navioSound.paused) playAudio(navioSound);
 });
 
-trackTarget.addEventListener("targetLost", () => {
-  stopAudio(aviaoSound);
-  stopAudio(navioSound);
+trackTarget.addEventListener('targetLost', () => {
+  pauseAudio(aviaoSound);
+  pauseAudio(navioSound);
 });
 
-// ------------------- FIM DO JOGO -------------------
-// Unifica parada de todos os sons
-const originalEndGame = window.endGame;
-window.endGame = function(message) {
+// Parar DEFINITIVAMENTE no fim do jogo (não volta ao focar o track)
+const _originalEndGame = window.endGame;
+window.endGame = function(message){
   stopAudio(aviaoSound);
   stopAudio(navioSound);
-  originalEndGame(message);
+  _originalEndGame(message);
 };
-
-// ------------------- DESBLOQUEIO MOBILE -------------------
-// Em mobile, som só toca após interação
-document.body.addEventListener("click", () => {
-  if (aviaoSound.paused) playAudio(aviaoSound);
-  if (navioSound.paused) playAudio(navioSound);
-});

@@ -6,6 +6,8 @@ const bodyBar = document.getElementById("body-bar");
 const pill = document.getElementById("pill");
 const emoji = document.getElementById("emoji");
 
+const originalEndGame = window.endGame;
+
 let spawnInterval, timer, progress;
 let speedUpDone = false;
 let gameStarted = false;
@@ -199,8 +201,42 @@ function stopAviaoSoundOnGameOver() {
 }
 
 // 🔹 Garante que o som pare quando o jogo terminar
-const originalEndGame = window.endGame;
+
 window.endGame = function(message) {
   stopAviaoSoundOnGameOver();
   originalEndGame(message);
 };
+
+
+// ---------------------------------------------------------------------
+// 🎵 Controle do som do Navio
+const navioSound = document.getElementById("navio-sound");
+navioSound.volume = 1; // ajusta volume (0 a 1)
+navioSound.loop = true; // som contínuo
+
+// Quando encontra o marcador → toca som do navio
+trackTarget.addEventListener("targetFound", () => {
+  if (gameOver) return; // não toca se o jogo terminou
+  if (!navioSound.paused) return; // já está tocando
+  navioSound.play().catch(err => console.log("Som bloqueado pelo navegador até interação:", err));
+});
+
+// Quando perde o marcador → pausa som do navio
+trackTarget.addEventListener("targetLost", () => {
+  navioSound.pause();
+});
+
+// Quando finalizar o jogo → pausa som do navio e garante que não volte
+function stopNavioSoundOnGameOver() {
+  navioSound.pause();
+  navioSound.currentTime = 0;
+}
+
+// 🔹 Garante que o som do navio pare quando o jogo terminar
+
+window.endGame = function(message) {
+  stopAviaoSoundOnGameOver(); // já existente
+  stopNavioSoundOnGameOver();  // novo
+  originalEndGame(message);
+};
+

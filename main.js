@@ -95,7 +95,7 @@ function spawnItem(item) {
 // Clique na pílula → melhora
 pill.addEventListener("click", () => {
   if (gamePaused || gameOver) return;
-  barProgress -= 5;
+  barProgress -= 10;
   if (barProgress < 0) barProgress = 0;
   acertoSound.play();
   if (barProgress <= 0) {
@@ -235,7 +235,6 @@ function stopNavioSoundOnGameOver() {
 // 🔹 Garante que o som do navio pare quando o jogo terminar
 
 window.endGame = function(message) {
-  stopAviaoSoundOnGameOver(); // já existente
   stopNavioSoundOnGameOver();  // novo
   originalEndGame(message);
 };

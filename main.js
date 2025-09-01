@@ -181,8 +181,9 @@ updateBar();
 // ---------------- ÁUDIO (robusto) ----------------
 const aviaoSound = document.getElementById('aviao-sound') || null;
 const navioSound = document.getElementById('navio-sound') || null;
+const carroSound = document.getElementById('carro-sound') || null;
 
-function setupAudio(el, volume = 1, loop = true) {
+function setupAudio(el, volume = 0.8, loop = true) {
   if (!el) return false;
   el.volume = volume;
   el.loop = loop;
@@ -191,6 +192,7 @@ function setupAudio(el, volume = 1, loop = true) {
 
 const hasAviao = setupAudio(aviaoSound, 1, true);
 const hasNavio = setupAudio(navioSound, 1, true);
+const hasCarro = setupAudio(carroSound, 1, true);
 
 // Desbloqueio em mobile: 1º toque libera áudio
 let audioUnlocked = false;
@@ -210,6 +212,7 @@ function unlockAudioOnce() {
 
   tryPrime(aviaoSound);
   tryPrime(navioSound);
+  tryPrime(carroSound);
 }
 window.addEventListener('pointerdown', unlockAudioOnce, { once: true });
 
@@ -233,11 +236,13 @@ trackTarget.addEventListener('targetFound', () => {
   if (gameOver) return;
   if (hasAviao && aviaoSound.paused) playAudio(aviaoSound);
   if (hasNavio && navioSound.paused) playAudio(navioSound);
+  if (hasCarro && carroSound.paused) playAudio(carroSound);
 });
 
 trackTarget.addEventListener('targetLost', () => {
   pauseAudio(aviaoSound);
   pauseAudio(navioSound);
+  pauseAudio(carroSound);
 });
 
 // Parar DEFINITIVAMENTE no fim do jogo (não volta ao focar o track)
@@ -245,6 +250,7 @@ const _originalEndGame = window.endGame;
 window.endGame = function (message) {
   stopAudio(aviaoSound);
   stopAudio(navioSound);
+  stopAudio(carroSound);
   if (typeof _originalEndGame === 'function') {
     _originalEndGame(message);
   } else {

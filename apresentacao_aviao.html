@@ -6,23 +6,17 @@
   <title>Apresentação</title>
   <link rel="stylesheet" href="style.css">
   <script src="js/main.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      font-family: 'Changa One', sans-serif;
-      background: #f4f4f4;
-      overflow: hidden; /* impede scroll */
-    }
-
+  <style>   
+    /* Faixas superiores e inferiores */
     .faixa-superior {
       height: 20px;
       background-color: #007BFF;
       width: 100%;
       border-bottom: 8px solid #8cc65a;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
     }
 
     .faixa-inferior {
@@ -30,75 +24,104 @@
       background-color: #007BFF;
       width: 100%;
       border-top: 8px solid #8cc65a;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
     }
 
+    /* Corpo da página */
+    body {
+      margin: 0;
+      font-family: 'Changa One', sans-serif;
+      text-align: center;
+      background: #d4e6f9; 
+      color: #fff;
+    }
+
+    /* Container principal */
     .container {
-      flex: 1;
+      position: relative;
+      z-index: 1;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      position: relative;
-      padding: 10px 20px;
+      align-items: center;
+      padding: 80px 20px; /* espaçamento para não colar nas faixas */
       box-sizing: border-box;
-    }
-
-    /* Logo */
-  .logo {
-    width: 450px; /* aumentada */
-    max-width: 60vw; /* garante responsividade */
-    margin-bottom: 10px;
-    animation: flutuar 3s ease-in-out infinite;
-  }
-
-    /* Texto de apresentação */
-    #textoApresentacao {
-      font-size: 15px;
-      line-height: 1.4;
-      color: #ffff00;
-      text-shadow: -1px -1px 0 black, 1px -1px 0 black, -2px 2px 0 black, 2px 1px 0 black;
-      margin-bottom: 20px;
-    }
-
-    /* Objetivos do jogo */
-    #game-objectives {
-  font-size: 10px;
-  line-height: 1.3;
-  color: #fff;
-  text-align: left;
-  max-width: 500px;
-  margin-bottom: 50px;
-
-  border: 6px solid #007BFF; /* linha verde */
-  border-radius: 10px;        /* cantos arredondados */
-  padding: 15px;              /* espaço interno */
-  box-shadow: 0 0 15px rgba(63, 63, 63, 0.5), 0 0 30px rgba(34, 34, 34, 0.3); /* sombra verde */
-  background-color: rgba(0, 0, 0, 0.7); /* leve fundo escuro para destaque */
-}
-
-
-    #game-objectives h2 {
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #ffff00;
       text-align: center;
-      text-shadow: 1px 1px 2px black;
     }
 
-    #game-objectives ul {
-      padding-left: 20px;
-      margin: 0;
+    /* Imagens em coluna (de cima para baixo) */
+    .imagens {
+      display: flex;
+      flex-direction: column; /* sempre em coluna */
+      justify-content: center;
+      align-items: center;
+      gap: 20px; /* espaçamento entre imagens */
+      margin-bottom: 20px;
+      width: 100%;
     }
 
-    #game-objectives li {
-      margin-bottom: 6px;
+    /* Avião */
+    .imagens img:first-child {
+      width: 150px;
+      max-width: 40%;
+      height: auto;
     }
 
-    
-    
+    /* Objetivos (sem destaque, apenas ajuste de tamanho) */
+    .imagens img:last-child {
+      width: 280px;
+      max-width: 80%;
+      height: auto;
+    }
 
-    /* Flutuação da logo */
+    /* Botões */
+    .botoes {
+      margin-top: 20px;
+    }
+
+    .btn-futurista {
+      padding: 14px 26px;
+      font-family: 'Changa One', sans-serif;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      background: linear-gradient(270deg, #00f, #00b1ff, #c383ff);
+      background-size: 600% 600%;
+      animation: gradientMove 6s ease infinite;
+
+      box-shadow: 0 0 10px rgba(0,255,255,0.6), 
+                  0 0 20px rgba(0,255,255,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-futurista:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(18, 255, 255, 0.9), 
+                  0 0 40px rgba(0,255,255,0.6);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Imagens com animação de flutuar */
+    .flutuante {
+      animation: flutuar 3s ease-in-out infinite;
+    }
+
     @keyframes flutuar {
       0% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
@@ -106,48 +129,45 @@
     }
 
     /* Responsividade */
-  @media (max-width: 1024px) {
-    .logo { width: 50px; }
-    #game-objectives { max-width: 400px; font-size: 13px; }
-  }
+    @media (max-width: 768px) {
+      .imagens img:first-child {
+        width: 420px;
+        max-width: 70%;
+      }
 
-  @media (max-width: 768px) {
-    .logo { width: 280px; }
-    #game-objectives { max-width: 350px; font-size: 12px; }
-  }
+      .imagens img:last-child {
+        width: 520px;
+        max-width: 90%;
+      }
+    }
 
-  @media (max-width: 480px) {
-    .logo { width: 120px; }
-    #game-objectives { max-width: 300px; font-size: 11px; }
-  }
+    @media (max-width: 480px) {
+      .imagens img:first-child {
+        width: 100px;
+      }
+
+      .imagens img:last-child {
+        width: 180px;
+      }
+
+      .btn-futurista {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+    }
   </style>
 </head>
 <body class="tela-apresentacao">
   <div class="faixa-superior"></div>
 
   <div class="container">
-    <img src="Imagens/Avi%C3%A3o_Nuvens.png" 
-     alt="Logo Produto" 
-     class="logo flutuante">
-
-    <p id="textoApresentacao">
-      Durante voos, mudanças de altitude,<br>
-      turbulência e a sensação de aceleração<br>
-      podem confundir os sistemas sensoriais,<br>
-      levando ao enjoo.
-    </p>
-
-    <div id="game-objectives">
-      <h2>🎯 Objetivos do Game</h2>
-      <ul>
-        <li>A barra vai ficando <span style="color: #bdff00; font-weight: bold;">verde</span> (enjoo) com o tempo.</li>
-        <li>Clicar na 💊 pílula → diminui o verde (cura).</li>
-        <li>Clicar no 🤢 emoji → acelera o verde (piora).</li>
-        <li>Manter a barra <span style="color: #00c6ff; font-weight: bold;">azul</span> até o tempo acabar (60s).</li>
-        <li>Se ficar totalmente <span style="color: #bdff00; font-weight: bold;">verde</span> → perdeu.</li>
-      </ul>
+    <!-- Bloco de imagens empilhadas -->
+    <div class="imagens">
+      <img src="Imagens/Aviao_Enjoo.png" alt="Logo Produto" class="logo flutuante"> 
+      <img src="Imagens/Objetivos_Low.png" alt="Objetivos" class="logo flutuante"> 
     </div>
 
+    <!-- Botão -->
     <div class="botoes">
       <button class="btn-futurista" id="skipBtn" onclick="window.location.href='aviao.html'">Pular</button>
     </div>

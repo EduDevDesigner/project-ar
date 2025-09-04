@@ -7,54 +7,54 @@
   <link rel="stylesheet" href="style.css">
   <script src="js/main.js"></script>
   <style>
-        
-    /* Container centralizado */
-    .container {
+    body {
+      margin: 0;
+      font-family: 'Changa One', sans-serif;
+      background: #d4e6f9;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      text-align: center;
-      padding: 1rem;
+    }
+
+    /* Linhas decorativas fixas */
+    .linha-superior,
+    .linha-inferior {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: auto;
+      max-height: 80px; /* altura máxima para dispositivos móveis */
+      z-index: 0;
+    }
+    .linha-superior { top: 0; }
+    .linha-inferior { bottom: 0; }
+
+    /* Container central */
+    .container {
       position: relative;
-      z-index: 1; /* garante que fique acima das faixas */
+      z-index: 1; /* garante que fique acima das linhas */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px 10px;
       box-sizing: border-box;
     }
 
-    /* Faixas azuis superior e inferior */
-    body::before, body::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 20px; /* altura da faixa */
-      background-color: #007BFF; /* azul */
-      z-index: 0;
-    }
-    body::before {
-      top: 0;
-      border-bottom: 8px solid #8cc65a; /* linha verde embaixo */
-    }
-    body::after {
-      bottom: 0;
-      border-top: 8px solid #8cc65a; /* linha verde em cima */
-    }
-
-    /* Imagem do logo2 posicionada mais próxima do topo */
-    .logo2 {
-      max-width: 150px;
-      width: 40%;
-      height: auto;
-      margin-bottom: 20px;
-      align-self: center;
-    }
-
-    /* Imagem responsiva com animação */
+    /* Logo central */
     .fundo {
       max-width: 80%;
       height: auto;
       animation: float 3s ease-in-out infinite;
+      margin-bottom: 50px;
+      z-index: 1;
     }
 
     /* Animação de leve flutuação vertical */
@@ -64,40 +64,29 @@
       100% { transform: translateY(0); }
     }
 
-    /* Mantendo o botão como está */
-    .btn-futurista {
-      margin-top: 1rem;
-      font-family: 'Changa One', sans-serif;
-      color: yellow;
-      text-shadow: 2px 2px 5px black; 
-    }
-
-    /* Garante que o conteúdo não encoste nas faixas */
-    .container {
-      padding-top: 10px; /* espaço superior > altura faixa */
-      padding-bottom: 10px; /* espaço inferior > altura faixa */
-    }
+    
 
     /* Responsividade */
     @media (max-width: 768px) {
-      .logo2 {
-        width: 50%;
-        margin-bottom: 15px;
-      }
+      .fundo { max-width: 80%; }
+      
+      .linha-superior, .linha-inferior { max-height: 60px; }
     }
-
     @media (max-width: 480px) {
-      .logo2 {
-        width: 60%;
-        margin-bottom: 10px;
-      }
+      .fundo { max-width: 50%; }
+      
+      .linha-superior, .linha-inferior { max-height: 50px; }
     }
   </style>
 </head>
 <body class="tela-inicial">
+  <!-- Linhas fixas de topo e base -->
+  <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
+  <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
+
+  <!-- Conteúdo central -->
   <div class="container">
-    
-    <img src="Imagens/Logo_Games.png" alt="Logo Produto" class="fundo" height="699" width="660">
+    <img src="Imagens/Logo_Games.png" alt="Logo Produto" class="fundo">
     <button class="btn-futurista" onclick="location.href='escolha.html'">Iniciar</button>
   </div>
 </body>

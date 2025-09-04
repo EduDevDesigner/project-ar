@@ -16,7 +16,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 3;
+      z-index: 2;
     }
 
     .faixa-inferior {
@@ -27,7 +27,7 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      z-index: 3;
+      z-index: 2;
     }
 
     /* Corpo da página */
@@ -37,27 +37,12 @@
       text-align: center;
       background: #d4e6f9; 
       color: #fff;
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
-    /* Plano de fundo (imagem fixada entre as faixas) */
-    .fundo-linhas {
-      position: fixed;
-      top: 28px;   /* abaixo da faixa superior (20px + 8px) */
-      bottom: 28px; /* acima da faixa inferior (20px + 8px) */
-      left: 0;
-      right: 0;
-      background: url("Imagens/Fundo_Linhas.png") no-repeat center center;
-      background-size: cover;
-      z-index: 0;
     }
 
     /* Container principal */
     .container {
       position: relative;
-      z-index: 2; /* fica acima do fundo */
+      z-index: 1;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -66,6 +51,12 @@
       padding: 80px 20px;
       box-sizing: border-box;
       text-align: center;
+
+      /* 🔹 Fundo responsivo */
+      background-image: url("Imagens/Fundo_Linhas.png");
+      background-size: 90% 90%;   /* cobre toda a área */
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     /* Imagens empilhadas (coluna) */
@@ -189,10 +180,6 @@
 <body class="tela-apresentacao">
   
   <div class="faixa-superior"></div>
-
-  <!-- Fundo fixo entre as faixas -->
-  <div class="fundo-linhas"></div>
-
   <div class="container">
     <!-- Bloco de imagens empilhadas -->
     <div class="imagens">

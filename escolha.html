@@ -20,20 +20,7 @@
       position: relative;
     }
 
-    /* Remove linhas azuis/verdes e adiciona imagens no topo e base */
-    body::before, body::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 40px; /* altura da faixa de imagem */
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      z-index: 0;
-    }    
-
-    /* Ajusta container para não colidir com as imagens */
+    /* Ajusta container */
     .container {
       position: relative;
       z-index: 1;
@@ -43,11 +30,11 @@
       justify-content: center;
       padding: 1rem;
       padding-top: 80px;
-      padding-bottom: 80px;
+      padding-bottom: 120px; /* espaço extra para não colidir com a linha inferior */
       box-sizing: border-box;
     }
     
-    /* Linhas decorativas como fundo */
+    /* Linhas decorativas fixas */
     .linha-superior {
       position: fixed;
       top: 0;
@@ -66,7 +53,7 @@
       z-index: 0;
     }
 
-    /* Imagem do logo */
+    /* Logo */
     .logo2 {
       position: fixed;
       top: 100px;
@@ -124,7 +111,7 @@
       font-family: 'Changa One', sans-serif;
       color: yellow;
       text-shadow: 2px 2px 5px black; 
-      bottom: 60px; 
+      bottom: 100px; /* suspende o botão acima da faixa inferior */
       left: 50%;
       transform: translateX(-50%);
       padding: 10px 25px;
@@ -146,14 +133,19 @@
     /* Responsividade */
     @media (max-width: 1024px) { .cards { gap: 15px; } .card { width: 210px; } }
     @media (max-width: 868px) { .cards { gap: 5px; } .card { width: 150px; } }
-    @media (max-width: 480px) { .cards { gap: 8px; } .card { width: 100px; } }
+    @media (max-width: 480px) {
+      .cards { gap: 8px; }
+      .card { width: 100px; }
+      .btn-futurista { bottom: 80px; font-size: 18px; padding: 8px 18px; }
+    }
   </style>
 </head>
 <body class="tela-escolha">
   <img src="Imagens/Logo_Games.png" alt="Logo2" class="logo2">
-  <!-- Linhas fixas de fundo -->
+  <!-- Linhas fixas -->
   <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
   <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
+
   <div class="container">
     <h2>Escolha seu próximo destino</h2>
     <div class="cards">

@@ -11,52 +11,58 @@
       font-family: 'Changa One', sans-serif;
       background: #d4e6f9;
       color: #fafafa;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* garante altura mínima */
-      text-align: center;
-      position: relative;
+    }
+
+    /* Linhas decorativas fixas */
+    .linha-superior {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
+    }
+
+    .linha-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
+    }
+
+    /* Logo fixo */
+    .logo2 {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 220px;
+      width: 40%;
+      height: auto;
+      z-index: 1;
     }
 
     /* Container central */
     .container {
       position: relative;
       z-index: 1;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 1rem;
-      padding-top: 80px;
-      padding-bottom: 160px; /* espaço extra para não encostar na linha inferior */
       box-sizing: border-box;
-    }
-    
-    /* Linhas decorativas fixas */
-    .linha-superior,
-    .linha-inferior {
-      position: fixed;
-      left: 0;
-      width: 100%;
-      height: auto;
-      z-index: 0;
-      pointer-events: none; /* evita cliques bloqueados */
-    }
-
-    .linha-superior { top: 0; }
-    .linha-inferior { bottom: 0; }
-
-    /* Logo */
-    .logo2 {
-      position: fixed;
-      top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 220px;
-      width: 30%;
-      height: auto;
-      z-index: 1;
     }
 
     h2 {
@@ -71,7 +77,6 @@
       align-items: flex-end;
       gap: 20px;
       flex-wrap: nowrap;
-      flex-shrink: 0;
     }
 
     .card {
@@ -105,7 +110,7 @@
       font-family: 'Changa One', sans-serif;
       color: yellow;
       text-shadow: 2px 2px 5px black; 
-      bottom: 200px; /* suspenso acima da linha inferior */
+      bottom: 100px; /* suspenso acima da linha inferior */
       left: 50%;
       transform: translateX(-50%);
       padding: 10px 25px;
@@ -125,21 +130,31 @@
     }
 
     /* Responsividade */
-    @media (max-width: 1024px) { .cards { gap: 15px; } .card { width: 210px; } }
-    @media (max-width: 868px) { .cards { gap: 5px; } .card { width: 150px; } }
+    @media (max-width: 1024px) { 
+      .cards { gap: 15px; } 
+      .card { width: 160px; } 
+    }
+    @media (max-width: 768px) { 
+      .cards { gap: 10px; } 
+      .card { width: 120px; } 
+      .btn-futurista { bottom: 80px; font-size: 18px; padding: 8px 18px; }
+    }
     @media (max-width: 480px) {
       .cards { gap: 8px; }
       .card { width: 100px; }
-      .btn-futurista { bottom: 100px; font-size: 18px; padding: 8px 18px; }
+      .btn-futurista { bottom: 70px; font-size: 16px; padding: 7px 16px; }
     }
   </style>
 </head>
 <body class="tela-escolha">
+  <!-- Logo -->
   <img src="Imagens/Logo_Games.png" alt="Logo2" class="logo2">
+
   <!-- Linhas fixas -->
   <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
   <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
 
+  <!-- Conteúdo central -->
   <div class="container">
     <h2>Escolha seu próximo destino</h2>
     <div class="cards">

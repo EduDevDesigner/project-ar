@@ -7,29 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="js/main.js"></script>
   <style>   
-    /* Faixas superiores e inferiores */
-    .faixa-superior {
-      height: 20px;
-      background-color: #007BFF;
-      width: 100%;
-      border-bottom: 8px solid #8cc65a;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 2;
-    }
-
-    .faixa-inferior {
-      height: 20px;
-      background-color: #007BFF;
-      width: 100%;
-      border-top: 8px solid #8cc65a;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-    }
-
     /* Corpo da página */
     body {
       margin: 0;
@@ -37,13 +14,16 @@
       text-align: center;
       background: #d4e6f9; 
       color: #fff;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* Container principal */
     .container {
       position: relative;
       z-index: 1;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -51,12 +31,6 @@
       padding: 80px 20px;
       box-sizing: border-box;
       text-align: center;
-
-      /* 🔹 Fundo responsivo */
-      background-image: url("Imagens/Fundo_Linhas.png");
-      background-size: 80% 70%;   /* cobre toda a área */
-      background-position: center;
-      background-repeat: no-repeat;
     }
 
     /* Imagens empilhadas (coluna) */
@@ -70,23 +44,39 @@
       width: 100%;
     }
 
-    /* Avião */
-    .imagens img:first-child {
-      width: 180px;
-      max-width: 50%;
-      height: auto;
-    }
-
     /* Objetivos */
-    .imagens img:last-child {
+    .imagens img:first-child {
       width: 720px;
       max-width: 100%;
       height: auto;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Linhas decorativas como fundo */
+    .linha-superior {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
+    }
+
+    .linha-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 0;
     }
 
     /* Botões */
     .botoes {
       margin-top: 0px;
+      z-index: 2;
+      position: relative;
     }
 
     .btn-futurista {
@@ -137,35 +127,20 @@
     /* Responsividade */
     @media (max-width: 1024px) {
       .imagens img:first-child {
-        width: 260px;
-        max-width: 100%;
-      }
-
-      .imagens img:last-child {
         width: 320px;
         max-width: 100%;
       }
     }
 
-    @media (max-width: 768px) { /* Tamanho do avião */
+    @media (max-width: 768px) {
       .imagens img:first-child {
-        width: 520px;
-        max-width: 120%;
-      }
-
-      .imagens img:last-child { /* Tamanho dos Objetivos */
-        width: 760px;
+        width: 260px;
         max-width: 100%;
       }
     }
 
     @media (max-width:20px) {
       .imagens img:first-child {
-        width: 580px;
-        max-width: 100%;
-      }
-
-      .imagens img:last-child {
         width: 150px;
         max-width: 100%;
       }
@@ -178,12 +153,14 @@
   </style>
 </head>
 <body class="tela-apresentacao">
-  
-  <div class="faixa-superior"></div>
+
+  <!-- Linhas fixas de fundo -->
+  <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
+  <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
+
   <div class="container">
     <!-- Bloco de imagens empilhadas -->
     <div class="imagens">
-     <!-- <img src="Imagens/Aviao_Enjoo2.png" alt="Logo Produto" class="logo flutuante"> -->
       <img src="Imagens/Objetivos_Final.png" alt="Objetivos" class="logo flutuante"> 
     </div>
 
@@ -193,6 +170,5 @@
     </div>
   </div>
 
-  <div class="faixa-inferior"></div>
 </body>
 </html>

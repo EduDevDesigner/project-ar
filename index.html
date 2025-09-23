@@ -32,19 +32,35 @@
     box-sizing: border-box;
   }
 
-  .fundo {
-    max-width: 80%;
+  /* ======== Avião flutuando ======== */
+  .aviao {
+    width: 200px; /* ajuste conforme necessário */
     height: auto;
-    animation: float 3s ease-in-out infinite;
-    margin-bottom: 20px;
+    animation: flutuarAviao 1s ease-in-out infinite;
+    margin-bottom: 80px;
   }
 
-  @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  @keyframes flutuarAviao {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
     100% { transform: translateY(0); }
   }
 
+  /* ======== Logo flutuando ======== */
+  .fundo {
+    max-width: 80%;
+    height: auto;
+    animation: flutuarLogo 3s ease-in-out infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes flutuarLogo {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* ======== Fundo Parallax ======== */
   .parallax-bottom {
     position: absolute;
     bottom: 0;
@@ -64,6 +80,7 @@
     100% { background-position: -2000px 0; }
   }
 
+  /* ======== Botões ======== */
   .btn-futurista {
     padding: 14px 26px;
     font-family: 'Changa One', sans-serif;
@@ -94,15 +111,17 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Responsividade */
+  /* ======== Responsividade ======== */
   @media (max-width: 768px) {
     .fundo { max-width: 100%; }
     .parallax-bottom { height: 150px; }
+    .aviao { width: 150px; }
   }
 
   @media (max-width: 480px) {
     .fundo { max-width: 70%; }
     .parallax-bottom { height: 120px; }
+    .aviao { width: 120px; }
   }
 
 </style>
@@ -112,7 +131,12 @@
 <div class="parallax-bottom"></div>
 
 <div class="container">
-  <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="fundo">
+  <!-- ✅ Avião com efeito de flutuação -->
+  <img src="Imagens/Perfil_Aviao.png" alt="perfil_aviao" class="aviao">
+
+  <!-- ✅ Logo com flutuação própria -->
+  <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="">
+
   <button class="btn-futurista" id="startBtn" style="display:none;" onclick="location.href='escolha.html'">Iniciar</button>
   <button class="btn-futurista" id="fullscreenBtn" onclick="enableFullscreen()">Abrir em Tela Cheia</button>
 </div>
@@ -151,7 +175,7 @@
   window.addEventListener('orientationchange', () => requestFullscreenIfNot());
   // Mantém fullscreen ao tocar na tela
   window.addEventListener('touchstart', () => requestFullscreenIfNot());
-  // Mantém fullscreen ao mudar o tamanho da janela (incluindo teclado virtual)
+  // Mantém fullscreen ao mudar o tamanho da janela
   window.addEventListener('resize', () => requestFullscreenIfNot());
 </script>
 

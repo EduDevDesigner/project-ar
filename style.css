@@ -13,9 +13,11 @@ body {
   text-align: center;
   background: #d4e6f9;
   overflow: hidden;       /* remove scroll */
-  touch-action: none;     /* previne arrastar/gestos */
+  touch-action: none;     /* previne arrastar/gestos */  
+  margin: 0;  
+  padding: 0;  
   height: 100%;
-  margin: 0;
+  width: 100%;  
 }
 
 .container {

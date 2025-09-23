@@ -258,20 +258,3 @@ window.endGame = function (message) {
     console.warn('originalEndGame não está definido.');
   }
 };
-
-//----------------------------------------------------------------
-
-
-
-function setAppHeight() {
-  // Obter a altura real da viewport
-  let vh = window.innerHeight;
-  // Aplicar a altura em uma variável CSS customizada
-  document.documentElement.style.setProperty('--app-height', `${vh}px`);
-}
-
-// Rodar no carregamento
-window.addEventListener('load', setAppHeight);
-// Rodar também quando a tela muda (rotação ou barra desaparece)
-window.addEventListener('resize', setAppHeight);
-

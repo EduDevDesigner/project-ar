@@ -258,3 +258,10 @@ window.endGame = function (message) {
     console.warn('originalEndGame não está definido.');
   }
 };
+
+//----------------------------------------------------------------
+
+document.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, { passive: false });
+

@@ -88,12 +88,24 @@
 
   <!-- Imagem inferior com efeito parallax -->
   <div class="parallax-bottom"></div>
-
+   
   <!-- Conteúdo central -->
   <div class="container">
     <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="fundo">
     <button class="btn-futurista" onclick="location.href='escolha.html'">Iniciar</button>
-  </div>
+    <button class="btn-futurista" onclick="openFullscreen()">Abrir em Tela Cheia</button>
+  </div>  
+  
+
+<script>
+function openFullscreen() {
+  const el = document.documentElement;
+  if (el.requestFullscreen) el.requestFullscreen();
+  else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen(); // iOS Safari
+  else if (el.msRequestFullscreen) el.msRequestFullscreen();         // IE/Edge antigo
+}
+</script>
+
 
 </body>
 </html>

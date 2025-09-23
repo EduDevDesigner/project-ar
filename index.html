@@ -13,7 +13,7 @@
       background: #d4e6f9;
       color: #fff;
       text-align: center;
-      overflow: hidden;
+      overflow: hidden; /* evita barra de rolagem */
       position: relative;
       display: flex;
       flex-direction: column;
@@ -22,23 +22,10 @@
       min-height: 100vh;
     }
 
-    /* Linhas decorativas fixas */
-    .linha-superior,
-    .linha-inferior {
-      position: fixed;
-      left: 0;
-      width: 100%;
-      height: auto;
-      max-height: 80px; /* altura máxima para dispositivos móveis */
-      z-index: 0;
-    }
-    .linha-superior { top: 0; }
-    .linha-inferior { bottom: 0; }
-
     /* Container central */
     .container {
       position: relative;
-      z-index: 1; /* garante que fique acima das linhas */
+      z-index: 2; /* acima do parallax */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -54,7 +41,7 @@
       height: auto;
       animation: float 3s ease-in-out infinite;
       margin-bottom: 50px;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Animação de leve flutuação vertical */
@@ -64,30 +51,49 @@
       100% { transform: translateY(0); }
     }
 
-    
+    /* Imagem inferior com efeito parallax */
+    .parallax-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;              /* largura maior para permitir a animação */
+  height: auto;             /* deixa a altura automática */
+  background-image: url('Imagens/Fundo.png'); /* 🔹 sua imagem */
+  background-repeat: repeat-x;
+  background-size: contain; /* mostra a imagem inteira */
+  background-position: bottom;
+  animation: mover 40s linear infinite;
+  z-index: 1;
+}
+
+    /* Animação horizontal contínua */
+    @keyframes mover {
+      0%   { background-position: 0 0; }
+      100% { background-position: -2000px 0; }
+    }
 
     /* Responsividade */
     @media (max-width: 768px) {
       .fundo { max-width: 100%; }
-      
-      .linha-superior, .linha-inferior { max-height: 60px; }
+      .parallax-bottom { height: 150px; }
     }
+
     @media (max-width: 480px) {
-      .fundo { max-width: 50%; }
-      
-      .linha-superior, .linha-inferior { max-height: 50px; }
+      .fundo { max-width: 70%; }
+      .parallax-bottom { height: 120px; }
     }
   </style>
 </head>
 <body class="tela-inicial">
-  <!-- Linhas fixas de topo e base -->
-  <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
-  <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
+
+  <!-- Imagem inferior com efeito parallax -->
+  <div class="parallax-bottom"></div>
 
   <!-- Conteúdo central -->
   <div class="container">
-    <img src="Imagens/Logo_Games.png" alt="Logo Produto" class="fundo">
+    <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="fundo">
     <button class="btn-futurista" onclick="location.href='escolha.html'">Iniciar</button>
   </div>
+
 </body>
 </html>

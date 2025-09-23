@@ -261,24 +261,4 @@ window.endGame = function (message) {
 
 //-----------------------------------------------------------------
 
-function enableFullscreen() {
-      const el = document.documentElement;
-      if (el.requestFullscreen) el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen(); // Safari iOS
-      else if (el.msRequestFullscreen) el.msRequestFullscreen(); // IE/Edge antigo
 
-      // Salva no localStorage que fullscreen foi ativado
-      localStorage.setItem('fullscreenActive', 'true');
-
-      // Troca visibilidade dos botões
-      document.getElementById('fullscreenBtn').style.display = 'none';
-      document.getElementById('startBtn').style.display = 'inline-block';
-    }
-
-    // Caso já tenha fullscreen ativado no passado, mostra botão iniciar automaticamente
-    if (localStorage.getItem('fullscreenActive') === 'true') {
-      document.getElementById('fullscreenBtn').style.display = 'none';
-      document.getElementById('startBtn').style.display = 'inline-block';
-      // Tenta abrir em tela cheia automaticamente
-      enableFullscreen();
-    }

@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Changa One', sans-serif;
-      background: #d4e6f9;
+      background: #cfe7ff;
       color: #fafafa;
       height: 100vh;
       text-align: center;
@@ -21,19 +21,6 @@
       align-items: center;
     }
 
-    /* Linhas decorativas fixas */
-    .linha-superior,
-    .linha-inferior {
-      position: fixed;
-      left: 0;
-      width: 100%;
-      height: auto;
-      max-height: 80px; /* Limite para dispositivos móveis */
-      z-index: 0;
-    }
-
-    .linha-superior { top: 0; }
-    .linha-inferior { bottom: 0; }
 
     /* Logo fixo */
     .logo2 {
@@ -156,22 +143,20 @@
 </head>
 <body class="tela-escolha">
   <!-- Logo -->
-  <img src="Imagens/Logo_Games.png" alt="Logo2" class="logo2">
+  <img src="Imagens/Escoler_Destino.png" alt="Logo2" class="logo2">
 
-  <!-- Linhas fixas -->
-  <img src="Imagens/Linhas_Superior.png" alt="Linha Superior" class="linha-superior">
-  <img src="Imagens/Linhas_Inferior.png" alt="Linha Inferior" class="linha-inferior">
+ 
 
   <!-- Conteúdo central -->
   <div class="container">
-    <h2>Escolha seu próximo destino</h2>
+    
     <div class="cards">
       <div class="card" data-tema="aviao" onclick="location.href='apresentacao_aviao.html'">
-        <img src="Imagens/Aviao_BT.png" alt="Avião">
+        <img src="Imagens/btn_Aviao.png" alt="Avião">
         <p>Avião</p>
       </div>
       <div class="card" data-tema="carro" onclick="location.href='apresentacao_carro.html'">
-        <img src="Imagens/Carro_BT.png" alt="Carro">
+        <img src="Imagens/btn_Carro.png" alt="Carro">
         <p>Carro</p>
       </div>
       <div class="card" data-tema="navio" onclick="location.href='navio.html'">

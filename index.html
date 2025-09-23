@@ -179,7 +179,12 @@
   window.addEventListener('touchstart', () => requestFullscreenIfNot());
   window.addEventListener('resize', () => requestFullscreenIfNot());
 </script>
-
+ <script>
+    // Impede o scroll e arraste da tela
+    document.addEventListener('touchmove', function(event){
+      event.preventDefault();
+    }, { passive: false });
+  </script>
 
 </body>
 </html>

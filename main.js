@@ -261,9 +261,7 @@ window.endGame = function (message) {
 
 //----------------------------------------------------------------
 
-document.addEventListener('touchmove', function(event) {
-  event.preventDefault();
-}, { passive: false });
+
 
 function setAppHeight() {
   // Obter a altura real da viewport

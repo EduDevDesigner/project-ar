@@ -151,16 +151,19 @@
     // Salva estado fullscreen
     localStorage.setItem('fullscreenActive', 'true');
 
+    // 🔹 Esconde o botão e mostra o de iniciar SOMENTE após o clique
     document.getElementById('fullscreenBtn').style.display = 'none';
     document.getElementById('startBtn').style.display = 'inline-block';
   }
 
-  // Detecta se fullscreen já foi ativado antes
+  // ❌ REMOVA ou comente esta parte para sempre exibir o botão na primeira visita
+  /*
   if (localStorage.getItem('fullscreenActive') === 'true') {
     document.getElementById('fullscreenBtn').style.display = 'none';
     document.getElementById('startBtn').style.display = 'inline-block';
     requestFullscreenIfNot();
   }
+  */
 
   function requestFullscreenIfNot() {
     const el = document.documentElement;
@@ -171,13 +174,12 @@
     }
   }
 
-  // Mantém fullscreen ao trocar orientação
+  // Mantém fullscreen ao trocar orientação ou redimensionar
   window.addEventListener('orientationchange', () => requestFullscreenIfNot());
-  // Mantém fullscreen ao tocar na tela
   window.addEventListener('touchstart', () => requestFullscreenIfNot());
-  // Mantém fullscreen ao mudar o tamanho da janela
   window.addEventListener('resize', () => requestFullscreenIfNot());
 </script>
+
 
 </body>
 </html>

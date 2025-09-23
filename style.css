@@ -9,23 +9,18 @@
 
 
 body {
+  margin: 0;
   font-family: 'Changa One', sans-serif;
   text-align: center;
-  background: #d4e6f9;
-  overflow: hidden;       /* remove scroll */
-  touch-action: none;     /* previne arrastar/gestos */  
-  margin: 0;  
-  padding: 0;  
-  height: 100%;
-  width: 100%;  
+   background: #d4e6f9;
 }
 
-.container { 
-  height: var(--app-height);
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .logo {

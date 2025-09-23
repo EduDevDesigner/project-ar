@@ -183,5 +183,16 @@
 
   <!-- Botão voltar -->
   <button class="btn-futurista2" onclick="location.href='index.html'">Voltar</button>
+  
+  <script>
+  // Se fullscreen foi ativado na index, abre automaticamente
+  if (localStorage.getItem('fullscreenActive') === 'true') {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen(); // Safari iOS
+    else if (el.msRequestFullscreen) el.msRequestFullscreen(); // IE/Edge antigo
+  }
+</script>
+
 </body>
 </html>

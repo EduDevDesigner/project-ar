@@ -13,7 +13,7 @@
       background: #d4e6f9;
       color: #fff;
       text-align: center;
-      overflow: hidden; /* evita barra de rolagem */
+      overflow: hidden;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -22,10 +22,9 @@
       min-height: 100vh;
     }
 
-    /* Container central */
     .container {
       position: relative;
-      z-index: 2; /* acima do parallax */
+      z-index: 2;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,7 +34,6 @@
       box-sizing: border-box;
     }
 
-    /* Logo central */
     .fundo {
       max-width: 80%;
       height: auto;
@@ -44,32 +42,64 @@
       z-index: 2;
     }
 
-    /* Animação de leve flutuação vertical */
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
 
-    /* Imagem inferior com efeito parallax */
     .parallax-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200%;              /* largura maior para permitir a animação */
-  height: auto;             /* deixa a altura automática */
-  background-image: url('Imagens/Fundo.png'); /* 🔹 sua imagem */
-  background-repeat: repeat-x;
-  background-size: contain; /* mostra a imagem inteira */
-  background-position: bottom;
-  animation: mover 40s linear infinite;
-  z-index: 1;
-}
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: auto;
+      background-image: url('Imagens/Fundo.png');
+      background-repeat: repeat-x;
+      background-size: contain;
+      background-position: bottom;
+      animation: mover 40s linear infinite;
+      z-index: 1;
+    }
 
-    /* Animação horizontal contínua */
     @keyframes mover {
       0%   { background-position: 0 0; }
       100% { background-position: -2000px 0; }
+    }
+
+    /* Botões */
+    .btn-futurista {
+      padding: 14px 26px;
+      font-family: 'Changa One', sans-serif;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      background: linear-gradient(270deg, #00f, #00b1ff, #c383ff);
+      background-size: 600% 600%;
+      animation: gradientMove 6s ease infinite;
+
+      box-shadow: 0 0 10px rgba(0,255,255,0.6), 
+                  0 0 20px rgba(0,255,255,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-futurista:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(18, 255, 255, 0.9), 
+                  0 0 40px rgba(0,255,255,0.6);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Responsividade */
@@ -92,10 +122,13 @@
   <!-- Conteúdo central -->
   <div class="container">
     <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="fundo">
-    <button class="btn-futurista" onclick="location.href='escolha.html'">Iniciar</button>
-    <button class="btn-futurista" onclick="openFullscreen()">Abrir em Tela Cheia</button>
+    
+    <!-- Botão de iniciar oculto inicialmente -->
+    <button class="btn-futurista" id="startBtn" style="display:none;" onclick="location.href='escolha.html'">Iniciar</button>
+    
+    <!-- Botão de tela cheia -->
+    <button class="btn-futurista" id="fullscreenBtn" onclick="openFullscreen()">Abrir em Tela Cheia</button>
   </div>  
-  
 
 <script>
 function openFullscreen() {
@@ -103,9 +136,12 @@ function openFullscreen() {
   if (el.requestFullscreen) el.requestFullscreen();
   else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen(); // iOS Safari
   else if (el.msRequestFullscreen) el.msRequestFullscreen();         // IE/Edge antigo
+
+  // Trocar visibilidade dos botões
+  document.getElementById('fullscreenBtn').style.display = 'none';
+  document.getElementById('startBtn').style.display = 'inline-block';
 }
 </script>
-
 
 </body>
 </html>

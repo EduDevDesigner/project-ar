@@ -1,166 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Escolha o tema</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Escolha o Tema</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
-  <style>
-    /* página base */
-    html,body{
-      height:100%;
-      margin:0;
-      padding:0;
-      font-family:'Changa One',sans-serif;
-      overflow:hidden; /* evita scroll que revela borda */
-    }
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-    body{
-      background:#cfe7ff; /* fallback caso algo dê errado */
-      color:#fafafa;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+<style>
+/* ===== BASE ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    /* ---- FUNDO (div com background) ----
-       - background-size: cover mantém a proporção (sem achatamento)
-       - background-position inicia no centro (50% 50%)
-       - animation move a posição da textura, não o elemento, evitando "buracos"
-    */
-    .fundo {
-      position: fixed;
-      inset: 0;                 /* top:0; right:0; bottom:0; left:0; */
-      z-index: 0;
-      pointer-events: none;     /* permite clicar nos elementos acima */
-      background-image: url('Imagens/Funda_Escolha.jpeg');
-      background-repeat: no-repeat;
-      background-size: cover;   /* NÃO deforma — apenas corta se necessário */
-      background-position: 50% 50%; /* centro da imagem no centro da tela */
-      will-change: background-position;
-    }
+/* ===== FUNDO ===== */
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('Imagens/Funda_Escolha.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  will-change: background-position;
+}
 
-    /* animação suave para MOBILE:
-       - altera background-position apenas alguns pontos percentuais (p.ex. 50% -> 47%)
-       - duration longa (30s) para ficar lento e sutil
-       - alternate faz ir e voltar automaticamente
-    */
-    @keyframes panCenter {
-      from { background-position: 50% 50%; }
-      to   { background-position: 47% 50%; } /* leve deslocamento à esquerda */
-    }
+/* animação lenta do fundo para telas mobile */
+@media (max-width: 768px) {
+  @keyframes panCenter {
+    0%   { background-position: 50% 50%; }
+    50%  { background-position: 47% 50%; }
+    100% { background-position: 50% 50%; }
+  }
+  .fundo {
+    animation: panCenter 10s ease-in-out infinite;
+  }
+}
 
-    /* ativa a animação apenas em telas ≤ 768px (mobile/tablet pequeno) */
-    @media (max-width: 768px) {
-      .fundo {
-        animation: panCenter 5s ease-in-out infinite alternate;
-      }
-    }
+/* ===== CABEÇALHO ===== */
+.logo2 {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  max-width: 360px;
+  width: 50%;
+  height: auto;
+  filter: drop-shadow(0 0 14px rgba(255,255,255,0.75));
+}
 
-    /* ---- restante do layout acima do fundo ---- */
-    .logo2 {
-      position: fixed;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      max-width:320px;
-      width:45%;
-      height:auto;
-    }
+/* ===== PAINEL CENTRAL ===== */
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      padding:1rem;
-      box-sizing:border-box;
-      width:100%;
-      max-width:1100px;
-    }
+.panel {
+  background: rgba(0,0,0,0.55);
+  padding: 60px 50px;
+  border-radius: 25px;
+  border: 3px solid rgba(0,255,200,0.6);
+  box-shadow: 0 0 30px rgba(0,255,200,0.4),
+              inset 0 0 40px rgba(0,255,200,0.25);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  animation: pulsePanel 4s ease-in-out infinite alternate;
+  align-items: center; /* centraliza horizontalmente */
+}
 
-    .cards {
-      display:flex;
-      gap:20px;
-      justify-content:center;
-      align-items:flex-end;
-      z-index:2;
-      pointer-events:auto;
-    }
+@keyframes pulsePanel {
+  from { box-shadow: 0 0 30px rgba(0,255,200,0.4), inset 0 0 40px rgba(0,255,200,0.25); }
+  to   { box-shadow: 0 0 50px rgba(0,255,255,0.6), inset 0 0 60px rgba(0,255,200,0.3); }
+}
 
-    .card {
-      cursor:pointer;
-      width:200px;
-      border:none;
-      background:transparent;
-      text-align:center;
-      user-select:none;
-    }
+/* ===== BOTÕES CENTRAIS ===== */
+.card {
+  position: relative;
+  cursor: pointer;
+  width: 260px;
+  height: 100px;
+  border: none;
+  background: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .card img { width:100%; display:block; transform-origin:center; transition: transform .25s ease; }
-    .card p { margin-top:8px; color:#fcff07; font-weight:bold; text-shadow:1px 1px 4px rgba(0,0,0,1); }
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
 
-    .card:hover img { transform: scale(1.08) rotate(0deg); }
+/* Glow ao passar o mouse */
+.card::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -120%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transform: rotate(25deg);
+  transition: opacity 0.4s;
+}
 
-    .btn-futurista2 {
-      position: fixed;
-      bottom: 70px;
-      left:50%;
-      transform: translateX(-50%);
-      z-index: 4;
-      padding:10px 22px;
-      font-size:18px;
-      border-radius:8px;
-      border:none;
-      background: linear-gradient(270deg,#00f,#00b1ff,#c383ff);
-      color: yellow;
-      cursor:pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
+.card:hover {
+  transform: scale(1.1);
+}
 
-    /* responsividade */
-    @media (max-width: 1024px) { .card{ width:160px } }
-    @media (max-width: 768px)  { .card{ width:120px } }
-    @media (max-width: 480px)  { .card{ width:100px } .logo2{ top:20px } .btn-futurista2{ bottom:60px } }
+.card:hover::after {
+  opacity: 1;
+  animation: shine 1.2s linear forwards;
+}
 
-  </style>
+@keyframes shine {
+  from { transform: translate(-200%, -200%) rotate(25deg); }
+  to   { transform: translate(200%, 200%) rotate(25deg); }
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-futurista2 {
+  margin-top: 30px; /* distância do painel */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,255,255,0.6),
+              0 0 35px rgba(0,255,255,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-futurista2 img {
+  width: 260px;  /* mesmo tamanho dos botões centrais */
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.btn-futurista2:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(0,255,255,0.8),
+              0 0 55px rgba(0,255,255,0.6);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .panel { gap: 35px; padding: 50px 40px; }
+  .card, .btn-futurista2 img { width: 220px; }
+}
+
+@media (max-width: 480px) {
+  .panel { gap: 28px; padding: 40px 30px; }
+  .card, .btn-futurista2 img { width: 180px; }
+  .logo2 { max-width: 300px; width: 60%; }
+}
+</style>
 </head>
-<body class="tela-escolha">
+<body>
 
-  <!-- Fundo como DIV (substitua <img class="fundo"> anterior por esta div) -->
-  <div class="fundo" aria-hidden="true"></div>
+<!-- Fundo -->
+<div class="fundo" aria-hidden="true"></div>
 
-  <!-- Logo e conteúdo -->
-  <img src="Imagens/Escoler_Destino.png" class="logo2" alt="Escolher destino">
+<!-- Logo -->
+<img src="Imagens/Escoler_Destino.png" class="logo2" alt="Escolher destino">
 
-  <div class="container">
-    <div class="cards">
-      <div class="card" data-tema="aviao" onclick="location.href='apresentacao_aviao.html'">
-        <img src="Imagens/btn_Aviao.png" alt="Avião">
-        <p>Avião</p>
-      </div>
-      <div class="card" data-tema="carro" onclick="location.href='apresentacao_carro.html'">
-        <img src="Imagens/btn_Carro.png" alt="Carro">
-        <p>Carro</p>
-      </div>
-      <div class="card" data-tema="navio" onclick="location.href='navio.html'">
-        <img src="Imagens/Navio_BT.png" alt="Navio">
-        <p>Navio</p>
-      </div>
+<!-- Painel central com botões em coluna -->
+<div class="container">
+  <div class="panel">
+    <div class="card" onclick="location.href='apresentacao_aviao.html'">
+      <img src="Imagens/btn_Aviao.png" alt="Avião">
+    </div>
+
+    <div class="card" onclick="location.href='apresentacao_carro.html'">
+      <img src="Imagens/btn_Carro.png" alt="Carro">
+    </div>
+
+    <div class="card" onclick="location.href='navio.html'">
+      <img src="Imagens/btn_navio.png" alt="Navio">
     </div>
   </div>
 
-  <button class="btn-futurista2" onclick="location.href='index.html'">Voltar</button>
+  <!-- Botão Voltar abaixo do painel -->
+  <button class="btn-futurista2" onclick="location.href='index.html'">
+    <img src="Imagens/btn_voltar.png" alt="Voltar">
+  </button>
+</div>
 
-  <script>
-    // Se quiser, para debug: ver a posição atual do background
-    // const fundo = document.querySelector('.fundo');
-    // setInterval(()=>console.log(getComputedStyle(fundo).backgroundPosition),5000);
-  </script>
 </body>
 </html>

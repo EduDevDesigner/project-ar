@@ -46,19 +46,6 @@ html, body {
   }
 }
 
-/* ===== CABEÇALHO ===== */
-.logo2 {
-  position: fixed;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  max-width: 360px;
-  width: 50%;
-  height: auto;
-  filter: drop-shadow(0 0 14px rgba(255,255,255,0.75));
-}
-
 /* ===== PAINEL CENTRAL ===== */
 .container {
   position: relative;
@@ -95,16 +82,17 @@ html, body {
   position: relative;
   cursor: pointer;
   width: 260px;
-  height: 100px;
   border: none;
   background: transparent;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-  transition: transform 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* efeito de luz contínuo */
+  box-shadow: 0 0 20px rgba(0,255,255,0.6),
+              0 0 35px rgba(0,255,255,0.3) inset;
+  animation: glowBtn 2.5s ease-in-out infinite alternate;
 }
 
 .card img {
@@ -114,32 +102,19 @@ html, body {
   border-radius: 20px;
 }
 
-/* Glow ao passar o mouse */
-.card::after {
-  content: "";
-  position: absolute;
-  top: -120%;
-  left: -120%;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
-  opacity: 0;
-  transform: rotate(25deg);
-  transition: opacity 0.4s;
+/* Glow pulsante */
+@keyframes glowBtn {
+  0%   { box-shadow: 0 0 20px rgba(0,255,255,0.6),
+                 0 0 35px rgba(0,255,255,0.3) inset; }
+  50%  { box-shadow: 0 0 35px rgba(0,255,255,0.8),
+                 0 0 50px rgba(0,255,255,0.5) inset; }
+  100% { box-shadow: 0 0 20px rgba(0,255,255,0.6),
+                 0 0 35px rgba(0,255,255,0.3) inset; }
 }
 
+/* Glow adicional ao hover */
 .card:hover {
   transform: scale(1.1);
-}
-
-.card:hover::after {
-  opacity: 1;
-  animation: shine 1.2s linear forwards;
-}
-
-@keyframes shine {
-  from { transform: translate(-200%, -200%) rotate(25deg); }
-  to   { transform: translate(200%, 200%) rotate(25deg); }
 }
 
 /* ===== BOTÃO VOLTAR ===== */
@@ -149,16 +124,17 @@ html, body {
   background: transparent;
   cursor: pointer;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,255,255,0.6),
-              0 0 35px rgba(0,255,255,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 10px 25px rgba(0,255,255,0.6),
+              0 0 35px rgba(0,255,255,0.4);
+  animation: glowBtn 2.5s ease-in-out infinite alternate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-futurista2 img {
-  width: 260px;  /* mesmo tamanho dos botões centrais */
+  width: 260px;
   height: auto;
   display: block;
   border-radius: 20px;
@@ -166,8 +142,8 @@ html, body {
 
 .btn-futurista2:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(0,255,255,0.8),
-              0 0 55px rgba(0,255,255,0.6);
+  box-shadow: 0 0 45px rgba(0,255,255,0.9),
+              0 0 65px rgba(0,255,255,0.6);
 }
 
 /* ===== RESPONSIVIDADE ===== */
@@ -179,7 +155,6 @@ html, body {
 @media (max-width: 480px) {
   .panel { gap: 28px; padding: 40px 30px; }
   .card, .btn-futurista2 img { width: 180px; }
-  .logo2 { max-width: 300px; width: 60%; }
 }
 </style>
 </head>
@@ -187,9 +162,6 @@ html, body {
 
 <!-- Fundo -->
 <div class="fundo" aria-hidden="true"></div>
-
-<!-- Logo -->
-<img src="Imagens/Escoler_Destino.png" class="logo2" alt="Escolher destino">
 
 <!-- Painel central com botões em coluna -->
 <div class="container">

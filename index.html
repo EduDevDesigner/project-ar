@@ -4,19 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Início</title>
+
+<!-- Font Awesome (para Instagram / Facebook) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 <style>
+  :root{
+    --instagram: #E1306C;     /* tom principal do instagram (aprox.) */
+    --facebook: #1877F2;      /* azul oficial do Facebook */
+    --x-bg: #000000;          /* cor de fundo do X (usamos círculo preto) */
+    --x-fill: #ffffff;        /* X em branco para contraste sobre preto */
+  }
+
   html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Changa One', sans-serif;
-    background: #cfe7ff;
-    color: #fff;
-    overflow: hidden; /* evita rolagem */
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background: #000;
+    color: #fff;
   }
 
-  body.fullscreen-active {
-    height: 100vh;
+  /* Fundo animado e levemente embaçado */
+  .background-container {
+    position: fixed;
+    inset: 0;
+    background-image: url('Imagens/Fundo_Index.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    animation: moverFundo 80s linear infinite;
+    filter: blur(3px);
+    transform: scale(1.03); /* evita bordas visíveis por causa do blur */
+    z-index: 0;
+  }
+  @keyframes moverFundo {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 50% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .container {
@@ -29,156 +56,166 @@
     text-align: center;
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
   }
 
-  /* ======== Avião flutuando ======== */
-  .aviao {
-    width: 200px; /* ajuste conforme necessário */
-    height: auto;
-    animation: flutuarAviao 1s ease-in-out infinite;
-    margin-bottom: 60px;
+  .panel {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 60px 50px;
+    border-radius: 25px;
+    border: 10px solid rgb(153, 0, 255);
+    box-shadow: 0 0 30px rgba(0,255,200,0.25),
+                inset 0 0 40px rgba(0,255,200,0.25);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    animation: pulsePanel 4s ease-in-out infinite alternate;
+    align-items: center;
+  }
+  @keyframes pulsePanel {
+    from { box-shadow: 0 0 30px rgba(0, 255, 200, 0.4), inset 0 0 40px rgba(0,255,200,0.25); }
+    to   { box-shadow: 0 0 50px rgba(0,255,255,0.6), inset 0 0 60px rgba(0,255,200,0.3); }
   }
 
-  @keyframes flutuarAviao {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-15px); }
-    100% { transform: translateY(0); }
-  }
-
-  /* ======== Logo flutuando ======== */
-  .fundo {
+  .logo {
     max-width: 80%;
     height: auto;
-    
-    margin-bottom: 20px;
+    margin-bottom: 26px;
+    animation: flutuarLogo 3s ease-in-out infinite;
   }
-
   @keyframes flutuarLogo {
     0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
+    50%  { transform: translateY(-8px); }
     100% { transform: translateY(0); }
   }
 
-  /* ======== Fundo Parallax ======== */
-  .parallax-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: auto;
-    background-image: url('Imagens/Fundo.png');
-    background-repeat: repeat-x;
-    background-size: contain;
-    background-position: bottom;
-    animation: mover 40s linear infinite;
-    z-index: 1;
-  }
-
-  @keyframes mover {
-    0% { background-position: 0 0; }
-    100% { background-position: -2000px 0; }
-  }
-
-  /* ======== Botões ======== */
-  .btn-futurista {
-    padding: 14px 26px;
-    font-family: 'Changa One', sans-serif;
-    font-size: 18px;
-    margin-top: 20px;
+  .card {
+    position: relative;
     cursor: pointer;
+    width: 260px;
     border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: linear-gradient(270deg, #00f, #00b1ff, #c383ff);
-    background-size: 600% 600%;
-    animation: gradientMove 6s ease infinite;
-    box-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0,255,255,0.6),
+                0 0 35px rgba(0,255,255,0.3) inset;
+    animation: glowBtn 2.8s ease-in-out infinite alternate;
+    transition: transform 0.25s ease;
+  }
+  .card img { width: 100%; height:auto; display:block; border-radius:20px; }
+  .card:hover { transform: scale(1.06); }
+  @keyframes glowBtn {
+    0%   { box-shadow: 0 0 18px rgba(0,255,255,0.5); }
+    50%  { box-shadow: 0 0 34px rgba(0,255,255,0.8); }
+    100% { box-shadow: 0 0 18px rgba(0,255,255,0.5); }
   }
 
-  .btn-futurista:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(18, 255, 255, 0.9), 0 0 40px rgba(0,255,255,0.6);
+  /* ===== Social icons area ===== */
+  .social-icons {
+    position: absolute;
+    bottom: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    z-index: 3;
   }
 
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
   }
 
-  /* ======== Responsividade ======== */
-  @media (max-width: 768px) {
-    .fundo { max-width: 100%; }
-    .parallax-bottom { height: 150px; }
-    .aviao { width: 150px; }
+  /* Instagram: gradient-ish background, white icon */
+  .social-icons a.instagram {
+    background: radial-gradient(circle at 30% 20%, #feda75 0%, #fa7e1e 20%, #d62976 50%, #962fbf 70%, #4f5bd5 100%);
   }
+  .social-icons a.instagram i { color: #fff; font-size:20px; }
 
-  @media (max-width: 480px) {
-    .fundo { max-width: 70%; }
-    .parallax-bottom { height: 120px; }
-    .aviao { width: 120px; }
+  /* Facebook: blue background, white f */
+  .social-icons a.facebook {
+    background: var(--facebook);
   }
+  .social-icons a.facebook i { color: #fff; font-size:18px; }
 
+  /* X: black background, white X glyph (SVG) */
+  .social-icons a.x {
+    background: var(--x-bg);
+  }
+  .social-icons a.x svg { display:block; width:20px; height:20px; }
+
+  .social-icons a:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.5); }
+
+  /* Responsividade */
+  @media (max-width:768px) {
+    .card { width: 220px; }
+    .social-icons { gap:14px; bottom:16px; }
+    .social-icons a { width:40px; height:40px; }
+  }
+  @media (max-width:480px) {
+    .card { width: 180px; }
+    .social-icons { gap:12px; bottom:12px; }
+    .social-icons a { width:36px; height:36px; }
+  }
 </style>
 </head>
-<body class="tela-inicial">
+<body>
 
-<div class="parallax-bottom"></div>
+  <!-- Fundo -->
+  <div class="background-container" aria-hidden="true"></div>
 
-<div class="container">
-  <!-- ✅ Avião com efeito de flutuação -->
-  <img src="Imagens/Perfil_Aviao.png" alt="perfil_aviao" class="aviao">
+  <div class="container">
+    <!-- Logo -->
+    <img src="Imagens/Logo_VertCare_Games.png" class="logo" alt="Logo VertCare Games">
 
-  <!-- ✅ Logo com flutuação própria -->
-  <img src="Imagens/Logo_VertCare_Games.png" alt="Logo Produto" class="fundo">
+    <!-- Painel -->
+    <div class="panel">
+      <button class="card" onclick="location.href='escolha.html'">
+        <img src="Imagens/btn_iniciar.png" alt="Iniciar">
+      </button>
 
-  <button class="btn-futurista" id="startBtn" style="display:none;" onclick="location.href='escolha.html'">Iniciar</button>
-  <button class="btn-futurista" id="fullscreenBtn" onclick="enableFullscreen()">Abrir em Tela Cheia</button>
-</div>
+      <button class="card" onclick="location.href='sobre.html'">
+        <img src="Imagens/btn_Sobre.png" alt="Sobre">
+      </button>
 
-<script>
-  function enableFullscreen() {
-    const el = document.documentElement;
-    if (el.requestFullscreen) el.requestFullscreen();
-    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+      <button class="card" onclick="location.href='creditos.html'">
+        <img src="Imagens/btn_Creditos.png" alt="Créditos">
+      </button>
+    </div>
 
-    // Salva estado fullscreen
-    localStorage.setItem('fullscreenActive', 'true');
+    <!-- Redes sociais (cores originais aproximadas) -->
+    <div class="social-icons" aria-hidden="false">
+      <!-- Instagram (gradient background + white icon) -->
+      <a class="instagram" href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
 
-    // 🔹 Esconde o botão e mostra o de iniciar SOMENTE após o clique
-    document.getElementById('fullscreenBtn').style.display = 'none';
-    document.getElementById('startBtn').style.display = 'inline-block';
-  }
+      <!-- Facebook (blue bg + white f) -->
+      <a class="facebook" href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+      </a>
 
-  // ❌ REMOVA ou comente esta parte para sempre exibir o botão na primeira visita
-  /*
-  if (localStorage.getItem('fullscreenActive') === 'true') {
-    document.getElementById('fullscreenBtn').style.display = 'none';
-    document.getElementById('startBtn').style.display = 'inline-block';
-    requestFullscreenIfNot();
-  }
-  */
+      <!-- X (black circle + white X SVG) -->
+      <a class="x" href="https://x.com" target="_blank" aria-label="X (ex-Twitter)">
+        <!-- white X glyph inside black circle -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+            <path d="M5 5 L19 19"></path>
+            <path d="M19 5 L5 19"></path>
+          </g>
+        </svg>
+      </a>
+    </div>
 
-  function requestFullscreenIfNot() {
-    const el = document.documentElement;
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-      if (el.requestFullscreen) el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-      else if (el.msRequestFullscreen) el.msRequestFullscreen();
-    }
-  }
-
-  // Mantém fullscreen ao trocar orientação ou redimensionar
-  window.addEventListener('orientationchange', () => requestFullscreenIfNot());
-  window.addEventListener('touchstart', () => requestFullscreenIfNot());
-  window.addEventListener('resize', () => requestFullscreenIfNot());
-</script>
-
+  </div>
 </body>
 </html>

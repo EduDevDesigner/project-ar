@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créditos</title>
+
+<!-- FONTES -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ======== ESTILO GERAL ======== */
+body.tela-info {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* ======== FUNDO ANIMADO ======== */
+.fundo-animado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+.fundo-animado .fundo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    animation: moverFundo 18s ease-in-out infinite alternate;
+    filter: brightness(0.7);
+}
+@keyframes moverFundo {
+    0% { transform: translate(-52%, -50%) scale(1.05); }
+    100% { transform: translate(-48%, -50%) scale(1.05); }
+}
+
+/* ======== LOGO COM FLUTUAÇÃO ======== */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    animation: flutuar 4s ease-in-out infinite; /* animação de flutuação */
+    transition: transform 0.3s ease;
+}
+.logo:hover {
+    transform: translateX(-50%) scale(1.08); /* leve zoom ao passar o mouse */
+}
+@keyframes flutuar {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* ======== CONTEÚDO ======== */
+.container {
+    max-width: 800px;
+    padding: 25px 30px;
+    border: 8px solid rgb(153, 0, 255);
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 140px;
+}
+
+/* Título em destaque */
+.titulo-destaque {
+    font-family: 'Changa One', cursive;
+    color: #f631ff;
+    font-size: 2.4em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Texto da lista */
+.creditos-lista p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+    margin: 12px 0;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Palavras em amarelo */
+.creditos-lista strong {
+    color: #FFD700;
+}
+
+/* ======== BOTÃO VOLTAR ======== */
+.btn-voltar {
+    margin-top: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-voltar img {
+    width: 120px;
+    transition: transform 0.2s;
+}
+.btn-voltar img:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+
+<body class="tela-info">
+
+    <!-- LOGO COM FLUTUAÇÃO -->
+    <img src="Imagens/Logo_VertCare_Games.png" alt="Logo VertCare Games" class="logo">
+
+    <!-- FUNDO COM ANIMAÇÃO -->
+    <div class="fundo-animado">
+        <img src="Imagens/Fundo_Navio.jpeg" alt="Fundo Navio" class="fundo">
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="container">
+        <h2 class="titulo-destaque">CRÉDITOS</h2>
+        <div class="creditos-lista">
+            <p><strong>Programação:</strong> Eduardo Galdino</p>
+            <p><strong>Design e Arte:</strong> Eduardo Galdino</p>
+            <p><strong>UX/UI design:</strong> Ticiane Melo</p>
+            <p><strong>Música:</strong> Trilha Original por DJ Pixel</p>
+            <p><strong>Engine:</strong> Unity 3D</p>
+            <p>Obrigado a todos os apoiadores e jogadores!</p>
+        </div>
+    </div>
+
+    <!-- BOTÃO VOLTAR -->
+    <button onclick="location.href='index.html'" class="btn-voltar">
+        <img src="Imagens/btn_voltar.png" alt="Voltar">
+    </button>
+
+</body>
+</html>

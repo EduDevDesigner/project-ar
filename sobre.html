@@ -4,33 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sobre o Jogo</title>
-<link rel="stylesheet" href="style.css">
+
+<!-- Fonte para o texto (melhor leitura) -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<!-- Fonte da logo (manter Changa One) -->
+<link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet">
+
+<style>
+/* ===== BASE ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===== FUNDO ANIMADO E MAIS CLARO ===== */
+.background-container {
+  position: fixed;
+  inset: 0;
+  background-image: url('Imagens/Fundo_Carro.jpeg');
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: blur(3px) brightness(0.8); /* mais claro */
+  transform: scale(1.03);
+  animation: moverFundo 80s linear infinite;
+  z-index: 0;
+}
+
+@keyframes moverFundo {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== CONTAINER CENTRAL ===== */
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100%;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+/* ===== LOGO ===== */
+.logo {
+  font-family: 'Changa One', cursive;
+  max-width: 220px;
+  height: auto;
+  margin-bottom: 30px;
+  animation: flutuarLogo 3s ease-in-out infinite;
+}
+@keyframes flutuarLogo {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* ===== PAINEL DE TEXTO ===== */
+.panel-text {
+  background: rgba(0,0,0,0.7);
+  border-radius: 20px;
+  padding: 30px 35px;
+  border: 8px solid rgb(153, 0, 255);
+  max-width: 900px;
+  width: 90%;
+  text-align: left;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,255,255,0.3), inset 0 0 15px rgba(0,255,200,0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ===== DESTAQUES ===== */
+.highlight {
+  color: #FFD700; /* amarelo */
+  font-weight: bold;
+}
+
+/* ===== TITULO ===== */
+.panel-text h2 {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  color: #fb6fff;
+  text-shadow: 1px 1px 4px #000;
+}
+
+/* ===== PARÁGRAFOS ===== */
+.panel-text p {
+  margin-bottom: 18px;
+  line-height: 1.6em;
+  font-size: 1.15em;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* ===== ÊNFASE ===== */
+.panel-text em {
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-voltar {
+  margin-top: 25px;
+  cursor: pointer;
+  width: 180px;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(0,255,255,0.5),
+              0 0 25px rgba(0,255,200,0.3) inset;
+  transition: transform 0.25s ease;
+}
+.btn-voltar img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.btn-voltar:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(0,255,255,0.8),
+              0 0 35px rgba(0,255,200,0.5) inset;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media(max-width:768px){
+  .logo { max-width:180px; margin-bottom:20px; }
+  .panel-text { padding: 25px 20px; }
+  .panel-text h2 { font-size: 1.9em; }
+  .panel-text p { font-size: 1em; }
+  .btn-voltar { width:150px; }
+}
+
+@media(max-width:480px){
+  .logo { max-width:150px; }
+  .panel-text { padding: 20px 15px; font-size: 0.95em; }
+  .panel-text h2 { font-size: 1.6em; }
+  .panel-text p { font-size: 0.9em; }
+  .btn-voltar { width:130px; }
+}
+</style>
 </head>
-<body class="tela-info">
+
+<body>
+  <!-- Fundo -->
+  <div class="background-container" aria-hidden="true"></div>
+
   <div class="container">
-    <h2>Sobre o Jogo</h2>
-    <p>
-      <strong>VertiCare GAME,</strong> É um jogo que entra em um universo divertido e educativo, 
-        no qual precisa controlar o nível de enjoo ao utilizar diferentes meios de transporte
-        — avião, carro ou navio. Inicialmente, o corpo está totalmente saudável (barra azul), 
-        mas, com o tempo, o movimento do transporte provoca enjoos (barra verde). O objetivo 
-        principal é manter o corpo saudável utilizando pílulas que reduzem os efeitos do enjoo 
-        antes que o tempo se esgote.
-    </p>
-    <p>
-      Desenvolvido para todas as idades, o objetivo é simples:
-    </p>
-    <P>
-      <em>o jogador deve impedir que a barra fique totalmente verde
-          e que o enjoo domine o corpo, exigindo reflexos rápidos e atenção constante. Com uma 
-          estética em estilo cartoon e feedbacks visuais e sonoros, a experiência torna-se 
-          imersiva, divertida e envolvente.
-     </em>
-    </P>
+    <!-- Logo -->
+    <img src="Imagens/Logo_VertCare_Games.png" alt="Logo VertCare Games" class="logo">
+
+    <!-- Painel de texto -->
+    <div class="panel-text">
+      <h2 class="highlight">SOBRE O JOGO</h2>
+      <p><span class="highlight">VertiCare GAME</span> é um jogo divertido e educativo, no qual o jogador deve controlar o nível de enjoo ao utilizar diferentes meios de transporte — avião, carro ou navio. Inicialmente, o corpo está saudável (barra azul), mas o movimento do transporte provoca enjoos (barra verde). O objetivo principal é manter o corpo saudável usando pílulas que reduzem os efeitos do enjoo antes que o tempo se esgote.</p>
+      <p><span class="highlight">Desenvolvido para todas as idades, o objetivo é simples:</span></p>
+      <p><em>O jogador deve impedir que a barra fique totalmente verde e que o enjoo domine o corpo, exigindo reflexos rápidos e atenção constante. Com uma estética em estilo cartoon e feedbacks visuais e sonoros, a experiência torna-se imersiva, divertida e envolvente.</em></p>
+    </div>
+
+    <!-- Botão Voltar -->
     <button onclick="location.href='index.html'" class="btn-voltar">
       <img src="Imagens/btn_voltar.png" alt="Voltar">
     </button>
   </div>
 </body>
 </html>
-

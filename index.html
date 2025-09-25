@@ -183,6 +183,9 @@
       <button class="card" onclick="location.href='creditos.html'">
         <img src="Imagens/btn_Creditos.png" alt="Créditos">
       </button>
+      <button class="card" onclick="location.href='creditos.html'">
+        <img src="Imagens/btn_sair.png" alt="Sair">
+      </button>
     </div>
 
     <!-- Redes sociais logo abaixo do painel -->
@@ -206,5 +209,15 @@
     </div>
 
   </div>
+  <script>
+function sairPagina() {
+  // Tenta fechar a aba
+  window.close();
+
+  // Caso não funcione, redireciona para uma página "de saída"
+  window.location.href = "about:blank";
+}
+</script>
+  
 </body>
 </html>

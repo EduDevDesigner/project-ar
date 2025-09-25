@@ -52,46 +52,46 @@ body.tela-info {
 /* ======== LOGO COM FLUTUAÇÃO ======== */
 .logo {
     position: absolute;
-    top: 20px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    animation: flutuar 4s ease-in-out infinite; /* animação de flutuação */
+    width: 180px;
+    animation: flutuar 4s ease-in-out infinite;
     transition: transform 0.3s ease;
 }
 .logo:hover {
-    transform: translateX(-50%) scale(1.08); /* leve zoom ao passar o mouse */
+    transform: translateX(-50%) scale(1.08);
 }
 @keyframes flutuar {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* ======== CONTEÚDO ======== */
+/* ======== CONTEÚDO (PAINEL MAIS COMPACTO) ======== */
 .container {
-    max-width: 800px;
-    padding: 25px 30px;
-    border: 8px solid rgb(153, 0, 255);
+    max-width: 600px;             /* 🔹 antes: 800px */
+    padding: 15px 20px;           /* 🔹 antes: 25px 30px */
+    border: 6px solid rgb(153, 0, 255);
     background: rgba(0, 0, 0, 0.55);
     border-radius: 15px;
     text-align: center;
-    margin-top: 140px;
+    margin-top: 120px;            /* 🔹 antes: 140px */
 }
 
 /* Título em destaque */
 .titulo-destaque {
     font-family: 'Changa One', cursive;
     color: #f631ff;
-    font-size: 2.4em;
-    margin-bottom: 20px;
+    font-size: 2em;               /* 🔹 levemente menor */
+    margin-bottom: 18px;
     text-shadow: 2px 2px 4px #000;
 }
 
 /* Texto da lista */
 .creditos-lista p {
-    font-size: 1.1em;
-    line-height: 1.7em;
-    margin: 12px 0;
+    font-size: 1em;               /* 🔹 antes: 1.1em */
+    line-height: 1.5em;
+    margin: 8px 0;
     text-shadow: 1px 1px 3px #000;
 }
 
@@ -102,13 +102,13 @@ body.tela-info {
 
 /* ======== BOTÃO VOLTAR ======== */
 .btn-voltar {
-    margin-top: 25px;
+    margin-top: 20px;
     background: none;
     border: none;
     cursor: pointer;
 }
 .btn-voltar img {
-    width: 120px;
+    width: 110px;                 /* 🔹 ligeiramente menor para equilibrar */
     transition: transform 0.2s;
 }
 .btn-voltar img:hover {
@@ -134,8 +134,8 @@ body.tela-info {
             <p><strong>Programação:</strong> Eduardo Galdino</p>
             <p><strong>Design e Arte:</strong> Eduardo Galdino</p>
             <p><strong>UX/UI Design:</strong> Ticiane Melo</p>
-            <p><strong>Game Design</strong> Eduardo Galdino/Ticiane Melo</p>
-             <p><strong>Sound Design:</strong> Eduardo Galdino</p>
+            <p><strong>Game Design:</strong> Eduardo Galdino / Ticiane Melo</p>
+            <p><strong>Sound Design:</strong> Eduardo Galdino</p>
             <p><strong>Música:</strong> Trilha Original por DJ Pixel</p>
             <p><strong>Plataforma:</strong> webXR</p>
             <p>Obrigado a todos os apoiadores e jogadores!</p>

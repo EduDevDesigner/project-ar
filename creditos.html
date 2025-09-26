@@ -20,7 +20,7 @@ body.tela-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* 🔹 começa mais acima */
+    justify-content: flex-start;
     min-height: 100vh;
 }
 
@@ -69,29 +69,29 @@ body.tela-info {
 
 /* ======== CONTEÚDO ======== */
 .container {
-    max-width: 600px;      /* 🔹 largura reduzida */
-    max-height: 55vh;      /* 🔹 altura limitada para caber tudo */
+    max-width: 600px;
+    max-height: 55vh;
     padding: 18px 20px;
     border: 6px solid rgb(153, 0, 255);
     background: rgba(0, 0, 0, 0.55);
     border-radius: 15px;
     text-align: center;
-    margin-top: 110px;     /* 🔹 um pouco mais próximo da logo */
-    overflow-y: auto;      /* 🔹 rolagem interna se necessário */
+    margin-top: 110px;
+    overflow-y: auto;
 }
 
 /* Título em destaque */
 .titulo-destaque {
     font-family: 'Changa One', cursive;
     color: #f631ff;
-    font-size: 2em;        /* 🔹 título um pouco menor */
+    font-size: 2em;
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px #000;
 }
 
 /* Texto da lista */
 .creditos-lista p {
-    font-size: 1em;        /* 🔹 texto levemente menor */
+    font-size: 1em;
     line-height: 1.6em;
     margin: 8px 0;
     text-shadow: 1px 1px 3px #000;
@@ -102,19 +102,37 @@ body.tela-info {
     color: #FFD700;
 }
 
-/* ======== BOTÃO VOLTAR ======== */
+/* ======== BOTÃO VOLTAR (MESMO ESTILO DA INDEX) ======== */
 .btn-voltar {
-    margin-top: 15px;
-    background: none;
-    border: none;
+    position: relative;
     cursor: pointer;
+    width: 240px; /* mesmo tamanho dos botões da index */
+    border: none;
+    background: transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 18px rgba(0,255,255,0.6),
+                0 0 30px rgba(0,255,255,0.3) inset;
+    animation: glowBtn 2.8s ease-in-out infinite alternate;
+    transition: transform 0.25s ease;
+    margin-top: 25px;
 }
 .btn-voltar img {
-    width: 110px;
-    transition: transform 0.2s;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
 }
-.btn-voltar img:hover {
-    transform: scale(1.1);
+.btn-voltar:hover {
+    transform: scale(1.06);
+}
+@keyframes glowBtn {
+    0%   { box-shadow: 0 0 16px rgba(0,255,255,0.5); }
+    50%  { box-shadow: 0 0 30px rgba(0,255,255,0.8); }
+    100% { box-shadow: 0 0 16px rgba(0,255,255,0.5); }
 }
 </style>
 </head>
